@@ -21,7 +21,7 @@ module.exports = {
   },
 
   development: {
-    client: 'postgresql', //how does the postgres client know where to look?
+    client: 'postgresql',
     connection: {
       database: 'biblion',
       user: 'rupertdenton',

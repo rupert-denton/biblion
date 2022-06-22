@@ -10,7 +10,7 @@ server.use(bodyParser.json())
 // static assets (js, css, favicon, html)
 server.use(express.static(path.join(__dirname, '/build')))
 // api routes
-server.use('/api/v1/biblion', require('./routes'))
+server.use('/api/v1', require('./routes'))
 // express.static(path_join(__dirname, '/client/build'))
 
 // if route don't match, give them the index.html, and let client side routing try
