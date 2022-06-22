@@ -6,6 +6,7 @@ exports.seed = function (knex) {
       country: 'English Speaking World',
       about: 1,
       link: 'https://thebookerprizes.com/',
+      genre: 'Various',
     },
   ])
 }

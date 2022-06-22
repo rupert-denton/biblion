@@ -11,13 +11,10 @@ server.use(bodyParser.json())
 server.use(express.static(path.join(__dirname, '/build')))
 // api routes
 server.use('/api/v1/biblion', require('./routes'))
-// xpress.static(path_join(__dirname, '/client/build'))
+// express.static(path_join(__dirname, '/client/build'))
 
 // if route don't match, give them the index.html, and let client side routing try
 server.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '/build/index.html'))
 })
-
-// https://sapidum.herokuapp.com/
-
 module.exports = server

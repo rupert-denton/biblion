@@ -8,6 +8,7 @@ exports.seed = function (knex) {
       author: 1,
       cover_image: 'https://cdn2.penguin.com.au/covers/400/9781529113877.jpg',
       pub_year: 2022,
+      genre: 'Literary Fiction',
     },
   ])
 }
