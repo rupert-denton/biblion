@@ -75,7 +75,7 @@ function addPrize(data) {
 async function addBooksToPrizes(authorData, bookData, prizeData) {
   const { name, bio, image } = authorData
   const { title, blurb, cover_image, pub_year, genre } = bookData
-  const { prize_name, year, winner, shortlisted, longlisted } = prizeData
+  const { prize_name, year, winner, shortlist, longlist } = prizeData
 
   const author_id = await addAuthor(authorData)
   const book_id = await addBook(bookData)
@@ -86,6 +86,9 @@ async function addBooksToPrizes(authorData, bookData, prizeData) {
     author_id: author_id,
     book_id: book_id,
   }
+
+  delete prize_info.prize_name
+  return await db('booksprizes').insert(prize_info)
 }
 
 module.exports = {

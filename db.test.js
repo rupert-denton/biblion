@@ -112,17 +112,18 @@ describe('addBooksToPrizes', () => {
     prize_name: 'The Booker Prize',
     year: 2020,
     winner: true,
-    shortlisted: true,
-    longlisted: true,
+    shortlist: true,
+    longlist: true,
   }
 
   test('add books to bookprize, books and authorbooks tables checking whether author/book exists before inputting', () => {
     expect.assertions(1)
     return addBooksToPrizes(authorData, bookData, prizeData).then((result) => {
-      return testDb('books')
+      return testDb('booksprizes')
         .select()
-        .then((books) => {
-          expect(books).toHaveLength(5)
+        .then((booksprizes) => {
+          console.log(booksprizes)
+          expect(booksprizes).toHaveLength(4)
         })
     })
   })
