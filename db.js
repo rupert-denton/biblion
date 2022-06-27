@@ -43,13 +43,49 @@ function getBooksAndPrizes() {
     .select('*', 'authors.name as author_name', 'prizes.name as prize_name') //stop this weird thing
 }
 
+async function getPrizeId(prizeName) {
+  return await db('prizes').select('id as prize_id').where('name', prizeName)
+}
+
+async function addAuthor(authorData) {
+  return await db('authors')
+    .insert(authorData)
+    .returning('id')
+    .then((result) => {
+      console.log(`Author data: ${result[0].id}`)
+      return result[0].id
+    })
+}
+
+async function addBook(bookData) {
+  return await db('books')
+    .insert(bookData)
+    .returning('id')
+    .then((result) => {
+      console.log(`Book data: ${result[0].id}`)
+      return result[0].id
+    })
+}
+
 function addPrize(data) {
   const { name, country, about, link, genre } = data
   return db('prizes').insert({ name, country, about, link, genre })
 }
 
-function addBooksToPrizes(data) {
-  const { name, year, title, author, winner, shortlisted, longlisted } = data
+async function addBooksToPrizes(authorData, bookData, prizeData) {
+  const { name, bio, image } = authorData
+  const { title, blurb, cover_image, pub_year, genre } = bookData
+  const { prize_name, year, winner, shortlisted, longlisted } = prizeData
+
+  const author_id = await addAuthor(authorData)
+  const book_id = await addBook(bookData)
+  const prize_id = await getPrizeId(prizeData.prize_name)
+  const prize_info = {
+    ...prizeData,
+    prize_id: prize_id[0].prize_id,
+    author_id: author_id,
+    book_id: book_id,
+  }
 }
 
 module.exports = {

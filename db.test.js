@@ -94,38 +94,31 @@ describe('addPrize', () => {
 })
 
 describe('addBooksToPrizes', () => {
-  const nomineesAndWinners = [
-    {
-      name: 'The Booker Prize',
-      year: 2020,
-      title: 'The Bible',
-      author: 'Jesus',
-      winner: true,
-      shortlisted: true,
-      longlisted: true,
-    },
-    {
-      name: 'The Booker Prize',
-      year: 2020,
-      title: 'LOTR',
-      author: 'Tolkien',
-      winner: false,
-      shortlisted: true,
-      longlisted: true,
-    },
-    {
-      name: 'The Booker Prize',
-      year: 2020,
-      title: 'Harry Potter',
-      author: 'JK Rowling',
-      winner: false,
-      shortlisted: false,
-      longlisted: true,
-    },
-  ]
-  test('add array of books to bookprize, books and authorbooks tables checking whether author/book exists before inputting', () => {
+  const bookData = {
+    title: 'The Bible',
+    blurb: 'Great book',
+    cover_image: 'https://edit.org/images/cat/book-covers-big-2019101610.jpg',
+    pub_year: 1999,
+    genre: 'Non-Fiction',
+  }
+
+  const authorData = {
+    name: 'Jesus',
+    bio: 'lord of the dance',
+    image: 'https://edit.org/images/cat/book-covers-big-2019101610.jpg',
+  }
+
+  const prizeData = {
+    prize_name: 'The Booker Prize',
+    year: 2020,
+    winner: true,
+    shortlisted: true,
+    longlisted: true,
+  }
+
+  test('add books to bookprize, books and authorbooks tables checking whether author/book exists before inputting', () => {
     expect.assertions(1)
-    return addBooksToPrizes(nomineesAndWinners).then((result) => {
+    return addBooksToPrizes(authorData, bookData, prizeData).then((result) => {
       return testDb('books')
         .select()
         .then((books) => {
