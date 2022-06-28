@@ -5,8 +5,9 @@ const {
   getAllPrizes,
   getBooksAndPrizes,
   getBooksByPrize,
-  addPrize,
   addBooksToPrizes,
+  joinAuthorToBook,
+  addurnData,
 } = require('./db')
 
 const config = require('./knexfile')
@@ -82,12 +83,78 @@ describe('addPrize', () => {
   }
   test('adds a new book prize to DB with the name given', () => {
     expect.assertions(2)
-    return addPrize(prizeData).then((result) => {
+    return addurnData(prizeData).then((result) => {
       return testDb('prizes')
         .select()
         .then((prizes) => {
           expect(prizes).toHaveLength(3)
           expect(prizes[2].name).toBe('Nobel Prize for Literature')
+        })
+    })
+  })
+})
+
+describe('addBook', () => {
+  const bookData = {
+    title: 'The Koran',
+    blurb: 'Cool book Lorem Ipsum',
+    cover_image: 'https://edit.org/images/cat/book-covers-big-2019101610.jpg',
+    pub_year: 2002,
+    genre: 'Non-Fiction',
+  }
+  test('adds a new book to DB', () => {
+    expect.assertions(1)
+    return addurnData(bookData).then((result) => {
+      return testDb('books')
+        .select()
+        .then((books) => {
+          const lastBook = books[books.length - 1]
+          expect(lastBook.title).toContain('The Koran')
+        })
+    })
+  })
+})
+
+describe('addAuthor', () => {
+  const authorData = {
+    name: 'Mike Muut',
+    bio: 'nice guy',
+    image: 'https://edit.org/images/cat/book-covers-big-2019101610.jpg',
+  }
+  test('adds a new author to DB', () => {
+    return addurnData(authorData).then((result) => {
+      return testDb('authors')
+        .select()
+        .then((authors) => {
+          const lastAuthorName = authors[authors.length - 1].name
+          const getlastAuthor = authors[authors.length - 1]
+          expect(getlastAuthor.name).toBe(lastAuthorName)
+        })
+    })
+  })
+})
+
+describe('addBooksToAuthors', () => {
+  const bookData = {
+    title: 'The Lord of The Potters',
+    blurb: 'Nice Read!',
+    cover_image: 'https://edit.org/images/cat/book-covers-big-2019101610.jpg',
+    pub_year: 1999,
+    genre: 'Non-Fiction',
+  }
+
+  const authorData = {
+    name: 'Rupert',
+    bio: 'lord of the dance',
+    image: 'https://edit.org/images/cat/book-covers-big-2019101610.jpg',
+  }
+
+  test('joins an author to a book after checking if either exist', () => {
+    return joinAuthorToBook(bookData, authorData).then((result) => {
+      return testDb('authorbooks')
+        .select()
+        .then((result) => {
+          expect(result).toHaveLength(4)
         })
     })
   })
@@ -122,7 +189,6 @@ describe('addBooksToPrizes', () => {
       return testDb('booksprizes')
         .select()
         .then((booksprizes) => {
-          console.log(booksprizes)
           expect(booksprizes).toHaveLength(4)
         })
     })

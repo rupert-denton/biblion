@@ -7,7 +7,6 @@ function getAllBooks() {
 }
 
 function getBooksByAuthor(name) {
-  // console.log(`This is the id: ${id}`)
   return db('authors')
     .select('id')
     .where({ name })
@@ -47,38 +46,70 @@ async function getPrizeId(prizeName) {
   return await db('prizes').select('id as prize_id').where('name', prizeName)
 }
 
-async function addAuthor(authorData) {
-  return await db('authors')
-    .insert(authorData)
+function checkIfExists(tableName, column, data) {
+  return db(tableName)
+    .select()
+    .first()
+    .where(column, data)
+    .then((result) => {
+      return result === undefined ? false : result.id
+    })
+}
+
+async function addurnData(data) {
+  let swiStatement = Object.keys(data)
+  let tableName
+  let param
+  let column
+
+  switch (swiStatement[1]) {
+    case 'bio':
+      tableName = 'authors'
+      column = 'name'
+      param = data.name
+      break
+    case 'blurb':
+      tableName = 'books'
+      column = 'title'
+      param = data.title
+      break
+    case 'country':
+      tableName = 'prizes'
+      column = 'name'
+      param = data.name
+      break
+    default:
+      return
+  }
+
+  const exists = await checkIfExists(tableName, column, param)
+
+  return exists ? exists : addData(tableName, data)
+}
+
+async function addData(tableName, data) {
+  return db(tableName)
+    .insert(data)
     .returning('id')
     .then((result) => {
-      console.log(`Author data: ${result[0].id}`)
       return result[0].id
     })
 }
 
-async function addBook(bookData) {
-  return await db('books')
-    .insert(bookData)
-    .returning('id')
-    .then((result) => {
-      console.log(`Book data: ${result[0].id}`)
-      return result[0].id
-    })
-}
+async function joinAuthorToBook(bookData, authorData) {
+  const author_id = await addurnData(authorData)
+  const book_id = await addurnData(bookData)
 
-function addPrize(data) {
-  const { name, country, about, link, genre } = data
-  return db('prizes').insert({ name, country, about, link, genre })
+  const author_book = {
+    book_id: book_id,
+    author_id: author_id,
+  }
+  return await db('authorbooks').insert(author_book)
 }
 
 async function addBooksToPrizes(authorData, bookData, prizeData) {
-  const { name, bio, image } = authorData
-  const { title, blurb, cover_image, pub_year, genre } = bookData
-  const { prize_name, year, winner, shortlist, longlist } = prizeData
-
-  const author_id = await addAuthor(authorData)
-  const book_id = await addBook(bookData)
+  const author_id = await addurnData(authorData)
+  const book_id = await addurnData(bookData)
   const prize_id = await getPrizeId(prizeData.prize_name)
   const prize_info = {
     ...prizeData,
@@ -98,6 +129,7 @@ module.exports = {
   getBooksAndPrizes,
   getBooksByPrize,
   getAllPrizes,
-  addPrize,
   addBooksToPrizes,
+  joinAuthorToBook,
+  addurnData,
 }
