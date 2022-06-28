@@ -3,11 +3,13 @@ const {
   getAllBooks,
   getBooksByAuthor,
   getAllPrizes,
+  getBookById,
   getBooksAndPrizes,
   getBooksByPrize,
   addBooksToPrizes,
   joinAuthorToBook,
   addurnData,
+  getAuthorById,
 } = require('./db')
 
 const config = require('./knexfile')
@@ -52,19 +54,37 @@ describe('getBooksAndPrizes', () => {
   })
 })
 
-describe('getBooksByAuthor', () => {
-  test('gets all books linked to an author', () => {
+describe('getBookByID', () => {
+  test('gets book linked to an book id', () => {
     expect.assertions(1)
-    return getBooksByAuthor('Joshua Cohen').then((result) => {
+    return getBookById(1).then((result) => {
+      expect(result[0].title).toContain('The Promise')
+    })
+  })
+})
+
+describe('getAuthorById', () => {
+  test('gets author linked to an id', () => {
+    expect.assertions(1)
+    return getAuthorById(1).then((result) => {
+      expect(result[0].name).toContain('Damon Galgut')
+    })
+  })
+})
+
+describe('getBooksByAuthor', () => {
+  test('gets all books linked to an author id', () => {
+    expect.assertions(1)
+    return getBooksByAuthor(3).then((result) => {
       expect(result[0].title).toContain('The Netanyahu')
     })
   })
 })
 
 describe('getBooksByPrize', () => {
-  test('gets all books linked to a specific prize', () => {
+  test('gets all books linked to a specific prize id', () => {
     expect.assertions(3)
-    return getBooksByPrize('The Booker Prize').then((result) => {
+    return getBooksByPrize(1).then((result) => {
       expect(result[0].title).toBe('The Promise')
       expect(result[1].title).toBe('Shuggie Bain')
       expect(result[1].name).toBe('Douglas Stuart')

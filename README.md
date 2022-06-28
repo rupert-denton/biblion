@@ -68,3 +68,41 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+// pages
+// / - home page with prizes
+// /prizes/:prizeId - prize page with all the details
+
+// resources
+  //resource for home page
+// GET /api/prizes - Nobel, Pulitzer
+  //resource for prize page
+// GET /api/prizes/:prizeId - information about the prize
+// GET /api/prize/s:prizeId/books - [{ name:, blurb:, ISBN:, author: { name:, } }, book, book]
+
+// / -> /api/prizes - [{id: 2}, {id: 3}, {id:4}]
+
+// /pulitzer -> /api/prizes/1
+
+// mysite.com/api/prizes/2542/books
+
+  //resource for book page
+// GET /api/books/:bookId - { name:, blurb:, ISBN:, author: {} }
+
+// GET /api/authors/:authorId - { name:, books: [{ name:, blurb:, ISBN: }] }
+
+// pretty important business logic
+// unit test db functions
+// router - nock return 200s, or 500s
+// api layer
+// react components
+// pretty important user interactions
+
+// import { getPrizesById } from './apiClient'
+// import * as api from './apiClient'
+// api.getPrizeById(id)
+// react -> redux -> api layer -> routes -> db
+
+// data-fetching libraries -> react-query, @reduxjs/toolkit/query, useSWR, Remix

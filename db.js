@@ -6,32 +6,41 @@ function getAllBooks() {
   return db('books').select()
 }
 
-function getBooksByAuthor(name) {
+function getBooksByAuthor(id) {
   return db('authors')
-    .select('id')
-    .where({ name })
+    .select()
+    .first()
+    .where({ id })
     .then((result) => {
-      const authorId = result[0].id
-      return db('authorbooks').join('books', 'books.author', authorId).select()
+      return db('authorbooks').join('books', 'books.author', result.id).select()
     })
 }
 
 function getAllPrizes() {
+  console.log(db)
   return db('prizes').select()
 }
 
-function getBooksByPrize(name) {
+function getBooksByPrize(id) {
   return db('prizes')
-    .select('id')
-    .where({ name })
+    .select()
+    .first()
+    .where({ id })
     .then((result) => {
-      const prize_id = result[0].id
       return db('booksprizes')
         .join('books', 'booksprizes.book_id', 'books.id')
         .join('authors', 'booksprizes.author_id', 'authors.id')
         .select()
-        .where('booksprizes.prize_id', prize_id)
+        .where('booksprizes.prize_id', id)
     })
+}
+
+function getBookById(id) {
+  return db('books').select().where({ id })
+}
+
+function getAuthorById(id) {
+  return db('authors').select().where({ id })
 }
 
 function getBooksAndPrizes() {
@@ -129,6 +138,8 @@ module.exports = {
   getBooksAndPrizes,
   getBooksByPrize,
   getAllPrizes,
+  getBookById,
+  getAuthorById,
   addBooksToPrizes,
   joinAuthorToBook,
   addurnData,
