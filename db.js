@@ -17,7 +17,6 @@ function getBooksByAuthor(id) {
 }
 
 function getAllPrizes() {
-  console.log(db)
   return db('prizes').select()
 }
 
