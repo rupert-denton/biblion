@@ -44,9 +44,39 @@ router.get('/prize/:prizeId/books', (req, res) => {
 
 //resource for book page
 // GET /books/:bookId - { name:, blurb:, ISBN:, author: {} }
-
+router.get('/books/:bookId/', (req, res) => {
+  let id = req.params.bookId
+  db.getBookById(id)
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
 //resource for author page
 // GET /authors/:authorId - { name:, books: [{ name:, blurb:, ISBN: }] }
+router.get('/authors/:authorId/', (req, res) => {
+  let id = req.params.authorId
+  db.getAuthorById(id)
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+
+router.get('/authors/:authorId/books', (req, res) => {
+  let id = req.params.authorId
+  db.getBooksByAuthor(id)
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
 
 //POST /api/v1/addbook
 router.post('/addbook', (req, res) => {

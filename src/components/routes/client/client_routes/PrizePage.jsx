@@ -36,7 +36,7 @@ export default function PrizePage() {
   const books = bookArr.map((book, id) => {
     return (
       <li key={id}>
-        <Link to={`/book/${id}`}>{book.title}</Link>
+        <Link to={`/books/${book.id}`}>{book.title}</Link>
       </li>
     )
   })

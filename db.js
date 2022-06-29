@@ -35,15 +35,19 @@ function getBooksByPrize(id) {
 }
 
 function getBookById(id) {
-  return db('books').select().where({ id })
+  return db('books')
+    .join('authors', 'books.author', 'authors.id')
+    .where('books.id', id)
+    .select('*', 'authors.name as author_name', 'authors.id as author_id')
+    .first()
 }
 
 function getAuthorById(id) {
-  return db('authors').select().where({ id })
+  return db('authors').select().where({ id }).first()
 }
 
 function getPrizeById(id) {
-  return db('prizes').select().where({ id })
+  return db('prizes').select().where({ id }).first()
 }
 
 function getBooksAndPrizes() {
