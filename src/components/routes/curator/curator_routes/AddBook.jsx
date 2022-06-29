@@ -1,5 +1,6 @@
 import './GlobalStyles.css'
 import React, { useState } from 'react'
+import * as api from '../../../../apiClient'
 
 export default function AddBook() {
   const [bookData, setBookData] = useState({
@@ -24,7 +25,12 @@ export default function AddBook() {
 
   const dataArr = [bookData, authorData, prizeData]
 
-  console.log(dataArr)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    api.postBooksToPrize(dataArr)
+  }
+
+  console.log(prizeData)
 
   const handleChangeBook = (e) => {
     let key = e.target.name
@@ -45,71 +51,91 @@ export default function AddBook() {
   const handleSetPrize = (e) => {
     let key = e.target.name
     let value = e.target.value
+    let checked = e.target.checked
     let prev = { ...prizeData }
-    prev[key] = value
+    prev[key] = value || checked
     setPrizeData(prev)
   }
 
   return (
     // book
-    <div className="curator-container">
-      <h1 className="heading">Book Details</h1>
-      <div className="prize-details-container">
-        <div className="prize-details">
-          <select
-            className="dropdown"
-            name="name"
-            value={prizeData.name}
-            onChange={(e) => handleSetPrize(e)}
-          >
-            <option value="" disabled>
-              --Prize Name--
-            </option>
-            <option value="The Booker Prize">The Booker Prize</option>
-            <option value="The Pulitzer Prize: Fiction">
-              The Pulitzer Prize: Fiction
-            </option>
-            <option value="Nobel Prize for Literature">
-              Nobel Prize for Literature
-            </option>
-          </select>
-          <input
-            className="year"
-            type="text"
-            name="year"
-            placeholder="Year"
-            value={setPrizeData.year}
-            onChange={(e) => handleSetPrize(e)}
-          ></input>
-        </div>
-        <div className="book-status">
-          <label>Winner</label>
-          <input
-            type="checkbox"
-            name="winner"
-            value={true}
-            onChange={(e) => handleSetPrize(e)}
-          />
-          <label>Shortlist</label>
-          <input
-            type="checkbox"
-            name="shortlist"
-            value={true}
-            onChange={(e) => handleSetPrize(e)}
-          />
-          <label>Longlist</label>
-          <input
-            type="checkbox"
-            name="longlist"
-            value={true}
-            onChange={(e) => handleSetPrize(e)}
-          />
-        </div>
-      </div>
+    <form onSubmit={handleSubmit}>
+      <div className="curator-container">
+        <h1 className="heading">Book Details</h1>
 
-      <h1 className="heading">Book Details</h1>
-      <div className="form-container">
-        <form>
+        <div className="prize-details-container">
+          <div className="prize-details">
+            <select
+              className="dropdown"
+              name="name"
+              value={prizeData.name}
+              onChange={(e) => handleSetPrize(e)}
+            >
+              <option value="" disabled>
+                --Prize Name--
+              </option>
+              <option value="The Booker Prize">The Booker Prize</option>
+              <option value="The Pulitzer Prize: Fiction">
+                The Pulitzer Prize: Fiction
+              </option>
+              <option value="Nobel Prize for Literature">
+                Nobel Prize for Literature
+              </option>
+            </select>
+            <input
+              className="year"
+              type="text"
+              name="year"
+              placeholder="Year"
+              value={setPrizeData.year}
+              onChange={(e) => handleSetPrize(e)}
+            ></input>
+          </div>
+          <div className="book-status">
+            <label>Winner</label>
+            <select
+              className="dropdown"
+              name="winner"
+              value={prizeData.winner}
+              onChange={(e) => handleSetPrize(e)}
+            >
+              <option value="" disabled>
+                --Prize Name--
+              </option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+            <label>Shortlist</label>
+            <select
+              className="dropdown"
+              name="shortlist"
+              value={prizeData.shortlist}
+              onChange={(e) => handleSetPrize(e)}
+            >
+              <option value="" disabled>
+                --Prize Name--
+              </option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+            <label>Longlist</label>
+            <select
+              className="dropdown"
+              name="longlist"
+              value={prizeData.longlist}
+              onChange={(e) => handleSetPrize(e)}
+            >
+              <option value="" disabled>
+                --Prize Name--
+              </option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+        </div>
+
+        <h1 className="heading">Book Details</h1>
+        <div className="form-container">
           <label>Book Title</label>
           <input
             type="text"
@@ -179,9 +205,9 @@ export default function AddBook() {
           <button type="submit" className="addBook">
             Add Book
           </button>
-        </form>
+        </div>
       </div>
-    </div>
+    </form>
   )
 }
 

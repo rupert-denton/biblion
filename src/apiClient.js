@@ -91,7 +91,7 @@ export function postBookWithAuthor(data) {
 export function postBooksToPrize(data) {
   console.log(data)
   return request
-    .post(url)
+    .post(`${url}addtoprize`)
     .set({ data })
     .set('Accept', 'application/json')
     .then((response) => {

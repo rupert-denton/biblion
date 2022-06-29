@@ -38,6 +38,7 @@ export default function BookPage() {
       <div>{title}</div>
       <img src={cover_image} alt="the book cover" />
       <Link to={`/authors/${author_id}`}>{author_name}</Link>
+      <div>{blurb}</div>
     </div>
   )
 }

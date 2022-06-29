@@ -131,7 +131,8 @@ async function addBooksToPrizes(bookData, authorData, prizeData) {
   joinAuthorToBook(bookData, authorData)
   const author_id = await addurnData(authorData)
   const book_id = await addurnData(bookData)
-  const prize_id = await getPrizeId(prizeData.prize_name)
+  const prize_id = await getPrizeId(prizeData.name)
+  console.log(author_id, book_id)
   const prize_info = {
     ...prizeData,
     prize_id: prize_id[0].prize_id,
@@ -140,7 +141,7 @@ async function addBooksToPrizes(bookData, authorData, prizeData) {
   }
   console.log(prize_info)
 
-  delete prize_info.prize_name
+  delete prize_info.name
   return await db('booksprizes').insert(prize_info)
 }
 
