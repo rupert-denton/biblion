@@ -20,7 +20,27 @@ router.get('/', (req, res) => {
 
 //resource for prize page
 // GET /prizes/:prizeId - information about the prize
-// GET /prize/s:prizeId/books - [{ name:, blurb:, ISBN:, author: { name:, } }, book, book]
+router.get('/prize/:prizeId', (req, res) => {
+  let id = req.params.prizeId
+  db.getPrizeById(id)
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+// GET /prize/:prizeId/books - [{ name:, blurb:, ISBN:, author: { name:, } }, book, book]
+router.get('/prize/:prizeId/books', (req, res) => {
+  let id = req.params.prizeId
+  db.getBooksByPrize(id)
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
 
 //resource for book page
 // GET /books/:bookId - { name:, blurb:, ISBN:, author: {} }

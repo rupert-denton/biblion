@@ -8,6 +8,7 @@ import { Routes, Route } from 'react-router-dom'
 import Curator from './components/routes/curator/Curator'
 import AddPrize from './components/routes/curator/curator_routes/AddPrize'
 import AddBook from './components/routes/curator/curator_routes/AddBook'
+import PrizePage from './components/routes/client/client_routes/PrizePage'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   // <React.StrictMode>
@@ -15,8 +16,8 @@ root.render(
     <Routes>
       {/* client */}
       <Route path="/" element={<App />} />
-      <Route path="/:awardname" element={<App />} />
-      <Route path="/:bookId" element={<App />} />
+      <Route path="/prize/:prizeId" element={<PrizePage />} />
+      <Route path="/book/:bookId" element={<App />} />
       <Route path="/:authorId" element={<App />} />
 
       {/* curator */}

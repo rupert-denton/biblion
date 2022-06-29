@@ -6,7 +6,31 @@ export function getAllPrizes() {
     .get(url)
     .then((response) => {
       const prizes = response.body
-      console.log(prizes)
+      return prizes
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+export function getPrizeById(id) {
+  return request
+    .get(`${url}prize/${id}`)
+    .then((response) => {
+      const prizeBooks = response.body
+      return prizeBooks
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+export function getBooksByPrize(id) {
+  return request
+    .get(`${url}prize/${id}/books`)
+    .then((response) => {
+      const prizeBooks = response.body
+      return prizeBooks
     })
     .catch((err) => {
       console.log(err)

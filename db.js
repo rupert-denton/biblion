@@ -42,6 +42,10 @@ function getAuthorById(id) {
   return db('authors').select().where({ id })
 }
 
+function getPrizeById(id) {
+  return db('prizes').select().where({ id })
+}
+
 function getBooksAndPrizes() {
   return db('booksprizes')
     .join('books', 'booksprizes.book_id', 'books.id')
@@ -148,4 +152,5 @@ module.exports = {
   addBooksToPrizes,
   joinAuthorToBook,
   addurnData,
+  getPrizeById,
 }
