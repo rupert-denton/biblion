@@ -6,7 +6,8 @@ const router = express.Router()
 // izes/:prizeId - prize page with all the details
 // resources
 //resource for home page
-// GET /api/prizes - Nobel, Pulitzer
+
+// GET /api/v1 - Nobel, Pulitzer
 router.get('/', (req, res) => {
   db.getAllPrizes()
     .then((result) => {
@@ -27,4 +28,32 @@ router.get('/', (req, res) => {
 //resource for author page
 // GET /authors/:authorId - { name:, books: [{ name:, blurb:, ISBN: }] }
 
+//POST /api/v1/addbook
+router.post('/addbook', (req, res) => {
+  const bookData = req.body[0]
+  const authorData = req.body[1]
+
+  db.joinAuthorToBook(bookData, authorData)
+    .then(() => {
+      res.sendStatus(201)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+
+//POST /api/v1/addtoprize
+router.post('/addtoprize', (req, res) => {
+  const bookData = req.body[0]
+  const authorData = req.body[1]
+  const prizeData = req.body[2]
+
+  db.addBooksToPrizes(bookData, authorData, prizeData)
+    .then(() => {
+      res.sendStatus(201)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
 module.exports = router

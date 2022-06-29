@@ -205,7 +205,7 @@ describe('addBooksToPrizes', () => {
 
   test('add books to bookprize, books and authorbooks tables checking whether author/book exists before inputting', () => {
     expect.assertions(1)
-    return addBooksToPrizes(authorData, bookData, prizeData).then((result) => {
+    return addBooksToPrizes(bookData, authorData, prizeData).then((result) => {
       return testDb('booksprizes')
         .select()
         .then((booksprizes) => {

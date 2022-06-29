@@ -1,9 +1,8 @@
-import logo from './logo.svg'
 import './App.css'
 import * as api from '../apiClient'
 import { useEffect } from 'react'
 
-function App() {
+export default function App() {
   useEffect(() => {
     api.getAllPrizes()
   }, [])
@@ -14,5 +13,3 @@ function App() {
     </div>
   )
 }
-
-export default App

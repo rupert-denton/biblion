@@ -91,7 +91,6 @@ async function addurnData(data) {
   }
 
   const exists = await checkIfExists(tableName, column, param)
-
   return exists ? exists : addData(tableName, data)
 }
 
@@ -106,7 +105,11 @@ async function addData(tableName, data) {
 
 async function joinAuthorToBook(bookData, authorData) {
   const author_id = await addurnData(authorData)
-  const book_id = await addurnData(bookData)
+  const completedBookData = {
+    ...bookData,
+    author: author_id,
+  }
+  const book_id = await addurnData(completedBookData)
 
   const author_book = {
     book_id: book_id,
@@ -115,7 +118,9 @@ async function joinAuthorToBook(bookData, authorData) {
   return await db('authorbooks').insert(author_book)
 }
 
-async function addBooksToPrizes(authorData, bookData, prizeData) {
+async function addBooksToPrizes(bookData, authorData, prizeData) {
+  console.log(bookData, authorData, prizeData)
+  joinAuthorToBook(bookData, authorData)
   const author_id = await addurnData(authorData)
   const book_id = await addurnData(bookData)
   const prize_id = await getPrizeId(prizeData.prize_name)
@@ -125,6 +130,7 @@ async function addBooksToPrizes(authorData, bookData, prizeData) {
     author_id: author_id,
     book_id: book_id,
   }
+  console.log(prize_info)
 
   delete prize_info.prize_name
   return await db('booksprizes').insert(prize_info)
