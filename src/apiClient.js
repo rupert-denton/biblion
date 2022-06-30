@@ -75,7 +75,6 @@ export function getBooksByAuthor(id) {
 
 // posts
 export function postBookWithAuthor(data) {
-  console.log(data)
   return request
     .post(url)
     .set({ data })
@@ -92,7 +91,7 @@ export function postBooksToPrize(data) {
   console.log(data)
   return request
     .post(`${url}addtoprize`)
-    .set({ data })
+    .send(data)
     .set('Accept', 'application/json')
     .then((response) => {
       console.log('yay got ' + JSON.stringify(response.body))

@@ -55,11 +55,7 @@ function getBooksAndPrizes() {
     .join('books', 'booksprizes.book_id', 'books.id')
     .join('authors', 'booksprizes.author_id', 'authors.id')
     .join('prizes', 'booksprizes.prize_id', 'prizes.id')
-    .select('*', 'authors.name as author_name', 'prizes.name as prize_name') //stop this weird thing
-}
-
-async function getPrizeId(prizeName) {
-  return await db('prizes').select('id as prize_id').where('name', prizeName)
+    .select('*', 'authors.name as author_name')
 }
 
 function checkIfExists(tableName, column, data) {
@@ -73,29 +69,30 @@ function checkIfExists(tableName, column, data) {
 }
 
 async function addurnData(data) {
+  console.log(data)
   let swiStatement = Object.keys(data)
   let tableName
   let param
   let column
 
-  switch (swiStatement[1]) {
-    case 'bio':
-      tableName = 'authors'
-      column = 'name'
-      param = data.name
-      break
-    case 'blurb':
-      tableName = 'books'
-      column = 'title'
-      param = data.title
-      break
-    case 'country':
-      tableName = 'prizes'
-      column = 'name'
-      param = data.name
-      break
-    default:
-      return
+  if (swiStatement.includes('bio')) {
+    tableName = 'authors'
+    column = 'name'
+    param = data.name
+  } else if (swiStatement.includes('blurb')) {
+    tableName = 'books'
+    column = 'title'
+    param = data.title
+  } else if (swiStatement.includes('longlist')) {
+    tableName = 'prizes'
+    column = 'prize_name'
+    param = data.prize_name
+  } else if (swiStatement.includes('country')) {
+    tableName = 'prizes'
+    column = 'prize_name'
+    param = data.prize_name
+  } else {
+    return
   }
 
   const exists = await checkIfExists(tableName, column, param)
@@ -127,21 +124,18 @@ async function joinAuthorToBook(bookData, authorData) {
 }
 
 async function addBooksToPrizes(bookData, authorData, prizeData) {
-  console.log(bookData, authorData, prizeData)
-  joinAuthorToBook(bookData, authorData)
+  await joinAuthorToBook(bookData, authorData)
   const author_id = await addurnData(authorData)
   const book_id = await addurnData(bookData)
-  const prize_id = await getPrizeId(prizeData.name)
-  console.log(author_id, book_id)
+  const prize_id = await addurnData(prizeData)
   const prize_info = {
     ...prizeData,
-    prize_id: prize_id[0].prize_id,
+    prize_id: prize_id,
     author_id: author_id,
     book_id: book_id,
   }
-  console.log(prize_info)
 
-  delete prize_info.name
+  delete prize_info.prize_name
   return await db('booksprizes').insert(prize_info)
 }
 

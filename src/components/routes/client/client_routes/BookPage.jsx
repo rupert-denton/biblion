@@ -5,6 +5,7 @@ import * as api from '../../../../apiClient'
 
 export default function BookPage() {
   let { bookId } = useParams()
+  console.log(bookId)
   const [bookInfo, setbookInfo] = useState({})
 
   useEffect(() => {
@@ -17,7 +18,8 @@ export default function BookPage() {
       .catch((err) => {
         console.log(err)
       })
-  }, [bookId])
+  }, [])
+  console.log(bookInfo)
 
   const {
     id,

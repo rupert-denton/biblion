@@ -8,7 +8,8 @@ export default function PrizePage() {
   const [prizeInfo, setPrizeInfo] = useState({})
   const [bookArr, setbookArr] = useState([{}])
 
-  console.log(bookArr, prizeInfo)
+  console.log(prizeInfo)
+  console.log(bookArr)
   useEffect(() => {
     api
       .getPrizeById(prizeId)
@@ -36,15 +37,15 @@ export default function PrizePage() {
   const books = bookArr.map((book, id) => {
     return (
       <li key={id}>
-        <Link to={`/books/${book.id}`}>{book.title}</Link>
+        <Link to={`/books/${book.book_id}`}>
+          {book.title}: {book.year}
+        </Link>
       </li>
     )
   })
 
   return (
     <div>
-      <div>Prize Info Here</div>
-
       <div>{books}</div>
     </div>
   )

@@ -94,6 +94,7 @@ router.post('/addbook', (req, res) => {
 
 //POST /api/v1/addtoprize
 router.post('/addtoprize', (req, res) => {
+  console.log('Incoming!')
   console.log(req.body)
   const bookData = req.body[0]
   const authorData = req.body[1]
@@ -104,6 +105,7 @@ router.post('/addtoprize', (req, res) => {
       res.sendStatus(201)
     })
     .catch((err) => {
+      console.log(err)
       util.logError(err)
     })
 })

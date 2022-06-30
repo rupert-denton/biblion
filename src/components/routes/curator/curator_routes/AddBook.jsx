@@ -16,7 +16,7 @@ export default function AddBook() {
     image: '',
   })
   const [prizeData, setPrizeData] = useState({
-    name: '',
+    prize_name: '',
     year: '',
     winner: false,
     shortlist: false,
@@ -67,15 +67,17 @@ export default function AddBook() {
           <div className="prize-details">
             <select
               className="dropdown"
-              name="name"
+              name="prize_name"
               value={prizeData.name}
               onChange={(e) => handleSetPrize(e)}
             >
               <option value="" disabled>
                 --Prize Name--
               </option>
-              <option value="The Booker Prize">The Booker Prize</option>
-              <option value="The Pulitzer Prize: Fiction">
+              <option name="prize_name" value="The Booker Prize">
+                The Booker Prize
+              </option>
+              <option name="prize_name" value="The Pulitzer Prize: Fiction">
                 The Pulitzer Prize: Fiction
               </option>
               <option value="Nobel Prize for Literature">

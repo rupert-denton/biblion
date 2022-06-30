@@ -2,7 +2,7 @@ exports.seed = function (knex) {
   return knex('prizes').insert([
     {
       id: 1,
-      name: 'The Booker Prize',
+      prize_name: 'The Booker Prize',
       country: 'English Speaking World',
       about: 1,
       link: 'https://thebookerprizes.com/',
@@ -10,7 +10,7 @@ exports.seed = function (knex) {
     },
     {
       id: 2,
-      name: 'The Pulitzer Prize: Fiction',
+      prize_name: 'The Pulitzer Prize: Fiction',
       country: 'USA',
       about:
         'For distinguished fiction published in book form during the year by an American author, preferably dealing with American life.',

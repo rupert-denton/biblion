@@ -36,8 +36,8 @@ describe('getAllPrizes', () => {
   test('gets all the awards db w', () => {
     expect.assertions(2)
     return getAllPrizes().then((result) => {
-      expect(result[0].name).toBe('The Booker Prize')
-      expect(result[1].name).toBe('The Pulitzer Prize: Fiction')
+      expect(result[0].prize_name).toBe('The Booker Prize')
+      expect(result[1].prize_name).toBe('The Pulitzer Prize: Fiction')
     })
   })
 })
@@ -54,11 +54,11 @@ describe('getBooksAndPrizes', () => {
   })
 })
 
-describe('getBookByID', () => {
+describe('getBookById', () => {
   test('gets book linked to an book id', () => {
     expect.assertions(1)
     return getBookById(1).then((result) => {
-      expect(result[0].title).toContain('The Promise')
+      expect(result.title).toContain('The Promise')
     })
   })
 })
@@ -67,7 +67,7 @@ describe('getAuthorById', () => {
   test('gets author linked to an id', () => {
     expect.assertions(1)
     return getAuthorById(1).then((result) => {
-      expect(result[0].name).toContain('Damon Galgut')
+      expect(result.name).toContain('Damon Galgut')
     })
   })
 })
@@ -94,7 +94,7 @@ describe('getBooksByPrize', () => {
 
 describe('addPrize', () => {
   const prizeData = {
-    name: 'Nobel Prize for Literature',
+    prize_name: 'Nobel Prize for Literature',
     country: 'International',
     about:
       'The Nobel Prize in Literature (here meaning for literature) is a Swedish literature prize that is awarded annually, since 1901, to an author from any country who has, in the words of the will of Swedish industrialist Alfred Nobel, "in the field of literature, produced the most outstanding work in an idealistic direction". The award is based on an authors body of work as a whole.',
@@ -108,7 +108,7 @@ describe('addPrize', () => {
         .select()
         .then((prizes) => {
           expect(prizes).toHaveLength(3)
-          expect(prizes[2].name).toBe('Nobel Prize for Literature')
+          expect(prizes[2].prize_name).toBe('Nobel Prize for Literature')
         })
     })
   })
@@ -209,6 +209,7 @@ describe('addBooksToPrizes', () => {
       return testDb('booksprizes')
         .select()
         .then((booksprizes) => {
+          console.log(booksprizes)
           expect(booksprizes).toHaveLength(4)
         })
     })
