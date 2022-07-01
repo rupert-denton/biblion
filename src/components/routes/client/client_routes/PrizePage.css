@@ -1,9 +1,44 @@
-import React from 'react'
+.prize-header{
+  margin-top: 1rem;
+  margin-left: 1rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
 
-export default function PrizePage() {
-  return (
-    <div>
-      <div>Your Book Goes Here</div>
-    </div>
-  )
+.prize-winners-group{
+
+}
+
+
+
+.year{
+  margin-top: 1rem;
+  margin-left: 1rem;
+  font-size: 1.5rem;
+}
+
+.book-card-container{
+  height: 30rem;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  width: 100vw;
+  border-bottom-style: solid;
+}
+
+.book-card{
+  display: flex;
+    height: 87%;
+    margin: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-card-image{
+  height: 70%;
+}
+
+.cover-image{
+  height: 100%;
 }
