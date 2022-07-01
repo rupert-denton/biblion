@@ -10,11 +10,13 @@ export default function AddBook() {
     pub_year: '',
     genre: '',
   })
+
   const [authorData, setAuthorData] = useState({
     name: '',
     bio: '',
     image: '',
   })
+
   const [prizeData, setPrizeData] = useState({
     prize_name: '',
     year: '',

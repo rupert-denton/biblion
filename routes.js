@@ -78,6 +78,18 @@ router.get('/authors/:authorId/books', (req, res) => {
     })
 })
 
+router.post('/addprize', (req, res) => {
+  const prizeData = req.body
+  console.log(prizeData)
+  db.addurnData(prizeData)
+    .then(() => {
+      res.sendStatus(201)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+
 //POST /api/v1/addbook
 router.post('/addbook', (req, res) => {
   const bookData = req.body[0]
@@ -94,8 +106,6 @@ router.post('/addbook', (req, res) => {
 
 //POST /api/v1/addtoprize
 router.post('/addtoprize', (req, res) => {
-  console.log('Incoming!')
-  console.log(req.body)
   const bookData = req.body[0]
   const authorData = req.body[1]
   const prizeData = req.body[2]
