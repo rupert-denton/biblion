@@ -48,6 +48,7 @@ router.get('/books/:bookId/', (req, res) => {
   let id = req.params.bookId
   db.getBookById(id)
     .then((result) => {
+      console.log(result)
       res.json(result)
     })
     .catch((err) => {

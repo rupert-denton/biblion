@@ -35,12 +35,25 @@ export default function BookPage() {
     image,
   } = bookInfo
 
+  const bookBlurb = bookInfo.blurb ? bookInfo.blurb.split(/\r?\n/) : ''
+  console.log(bookBlurb)
+
+  const bookParagraphs = bookInfo.blurb
+    ? bookBlurb.map((para, i) => {
+        return (
+          <React.Fragment key={i}>
+            <div className="paragraph-text">{para}</div>
+          </React.Fragment>
+        )
+      })
+    : ''
+
   return (
     <div>
       <div>{title}</div>
       <img src={cover_image} alt="the book cover" />
       <Link to={`/authors/${author_id}`}>{author_name}</Link>
-      <div>{blurb}</div>
+      <div>{bookParagraphs}</div>
     </div>
   )
 }
