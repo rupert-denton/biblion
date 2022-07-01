@@ -1,0 +1,25 @@
+.navbar-container{
+  border-style: solid;
+  height: 3rem;
+  background-color: black;
+  position: sticky;
+  top: 0;
+}
+
+.navbar-content{
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 100%;
+}
+
+.logo-container{
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.biblion-logo{
+  color: white;
+  font-size: 1.65rem;
+  font-weight: 500;
+}
