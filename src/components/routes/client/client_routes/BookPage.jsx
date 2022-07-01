@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import * as api from '../../../../apiClient'
+import Navbar from '../../../ui/Navbar'
 
 export default function BookPage() {
   let { bookId } = useParams()
@@ -50,6 +51,7 @@ export default function BookPage() {
 
   return (
     <div>
+      <Navbar />
       <div>{title}</div>
       <img src={cover_image} alt="the book cover" />
       <Link to={`/authors/${author_id}`}>{author_name}</Link>

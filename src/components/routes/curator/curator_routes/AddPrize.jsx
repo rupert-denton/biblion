@@ -1,6 +1,7 @@
 import './GlobalStyles.css'
 import { React, useState } from 'react'
 import * as api from '../../../../apiClient'
+import Navbar from '../../../ui/Navbar'
 
 export default function AddPrize() {
   const [newPrizeData, setNewPrizeData] = useState({
@@ -29,6 +30,7 @@ export default function AddPrize() {
 
   return (
     <div className="curator-container">
+      <Navbar />
       <h1 className="heading">Add Prize</h1>
       <div className="form-container">
         <form className="form" onSubmit={handleSubmit}>

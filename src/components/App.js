@@ -2,6 +2,7 @@ import './App.css'
 import { Link } from 'react-router-dom'
 import * as api from '../apiClient'
 import { useEffect, useState } from 'react'
+import Navbar from './ui/Navbar'
 
 export default function App() {
   const [prizesData, setPrizesData] = useState([{}])
@@ -20,16 +21,16 @@ export default function App() {
 
   const prizes = prizesData.map((prize, id) => {
     return (
-      <h3 key={id} className="curator-link">
-        <Link to={`/prize/${prize.id}`}>{prize.prize_name}</Link>
-      </h3>
+      <Link key={id} className="prize-container" to={`/prize/${prize.id}`}>
+        <div className="prize-name">{prize.prize_name}</div>
+      </Link>
     )
   })
 
   return (
     <div className="App">
-      <h1>Biblion</h1>
-      {prizes}
+      <Navbar />
+      <div className="homepage-container">{prizes}</div>
     </div>
   )
 }

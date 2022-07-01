@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import * as api from '../../../../apiClient'
+import Navbar from '../../../ui/Navbar'
 
 export default function AuthorPage() {
   let { authorId } = useParams()
@@ -39,6 +40,7 @@ export default function AuthorPage() {
 
   return (
     <div>
+      <Navbar />
       <div>{name}</div>
       <div>
         <img src={image} alt="the author" />

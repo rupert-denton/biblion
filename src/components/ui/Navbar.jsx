@@ -8,7 +8,12 @@ export default function Navbar() {
     <div className="navbar-container">
       <div className="navbar-content">
         <div className="logo-container">
-          <div className="biblion-logo">Biblion.</div>
+          <Link to={'/'} className="biblion-logo">
+            Biblion.
+          </Link>
+          <Link to={'/curator'} className="nav-item">
+            Curator
+          </Link>
         </div>
       </div>
     </div>

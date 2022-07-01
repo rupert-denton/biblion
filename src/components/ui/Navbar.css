@@ -16,10 +16,27 @@
   display: flex;
   height: 100%;
   align-items: center;
+  justify-content: space-between;
 }
 
 .biblion-logo{
   color: white;
   font-size: 1.65rem;
   font-weight: 500;
+  text-decoration: none;
+}
+
+.biblion-logo:hover{
+  padding:.2rem;
+  border-style: solid;
+  border-color: white;
+  transition: 0.1s;
+  border-radius: .2rem
+}
+
+.nav-item{
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
 }
