@@ -10,6 +10,9 @@ const {
   joinAuthorToBook,
   addurnData,
   getAuthorById,
+  addBookToList,
+  getAllLists,
+  getBooksByList,
 } = require('./db')
 
 const config = require('./knexfile')
@@ -203,14 +206,62 @@ describe('addBooksToPrizes', () => {
     longlist: true,
   }
 
-  test('add books to bookprize, books and authorbooks tables checking whether author/book exists before inputting', () => {
+  test('add books to bookprize  checking whether author/book exists before inputting', () => {
     expect.assertions(1)
     return addBooksToPrizes(bookData, authorData, prizeData).then((result) => {
       return testDb('booksprizes')
         .select()
         .then((booksprizes) => {
-          console.log(booksprizes)
           expect(booksprizes).toHaveLength(4)
+        })
+    })
+  })
+})
+
+describe('create, add books to lists, get books from lists', () => {
+  test('get all lists', () => {
+    expect.assertions(1)
+    return getAllLists().then((result) => {
+      expect(result[0].list_name).toBe('LGBTQI')
+    })
+  })
+
+  test('get all books associated with a list', () => {
+    expect.assertions(1)
+    return getBooksByList(1).then((result) => {
+      expect(result).toHaveLength(2)
+    })
+  })
+
+  const listData = {
+    list_name: 'Critically Acclaimed Novels by African Authors',
+    list_description: 'Lorem Ipsum Africa Africa',
+  }
+
+  test('adds a list to list table  DB', () => {
+    expect.assertions(1)
+    return addurnData(listData).then((result) => {
+      return testDb('lists')
+        .select()
+        .then((lists) => {
+          const lastListName = lists[lists.length - 1].list_name
+          const getLastListName = lists[lists.length - 1]
+          expect(getLastListName.list_name).toBe(lastListName)
+        })
+    })
+  })
+
+  test('add books to list by id', () => {
+    expect.assertions(1)
+    let object = {
+      list_id: 1,
+      book_id: 1,
+    }
+    return addBookToList(object).then((result) => {
+      return testDb('booklists')
+        .select()
+        .then((booklists) => {
+          expect(booklists).toHaveLength(3)
         })
     })
   })

@@ -34,6 +34,14 @@ function getBooksByPrize(id) {
     })
 }
 
+function getBooksByList(id) {
+  return db('booklists')
+    .join('books', 'booklists.book_id', 'books.id')
+    .join('authors', 'books.author', 'authors.id')
+    .select()
+    .where('booklists.list_id', id)
+}
+
 function getBookById(id) {
   return db('books')
     .join('authors', 'books.author', 'authors.id')
@@ -69,7 +77,6 @@ function checkIfExists(tableName, column, data) {
 }
 
 async function addurnData(data) {
-  console.log(data)
   let swiStatement = Object.keys(data)
   let tableName
   let param
@@ -91,6 +98,10 @@ async function addurnData(data) {
     tableName = 'prizes'
     column = 'prize_name'
     param = data.prize_name
+  } else if (swiStatement.includes('list_name')) {
+    tableName = 'lists'
+    column = 'list_name'
+    param = data.list_name
   } else {
     return
   }
@@ -116,13 +127,20 @@ async function joinAuthorToBook(bookData, authorData) {
   }
   const book_id = await addurnData(completedBookData)
 
-  const author_book = {
+  const authorBook = {
     book_id: book_id,
     author_id: author_id,
   }
-  return await db('authorbooks').insert(author_book)
+  return await db('authorbooks').insert(authorBook)
 }
 
+async function addBookToList(bookListObject) {
+  return await db('booklists').insert(bookListObject)
+}
+
+function getAllLists() {
+  return db('lists').select()
+}
 async function addBooksToPrizes(bookData, authorData, prizeData) {
   await joinAuthorToBook(bookData, authorData)
   const author_id = await addurnData(authorData)
@@ -152,4 +170,7 @@ module.exports = {
   joinAuthorToBook,
   addurnData,
   getPrizeById,
+  addBookToList,
+  getAllLists,
+  getBooksByList,
 }

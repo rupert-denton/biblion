@@ -79,12 +79,11 @@ router.get('/authors/:authorId/books', (req, res) => {
     })
 })
 
-router.post('/addprize', (req, res) => {
-  const prizeData = req.body
-  console.log(prizeData)
-  db.addurnData(prizeData)
-    .then(() => {
-      res.sendStatus(201)
+//GET get all books
+router.get('/books', (req, res) => {
+  db.getAllBooks()
+    .then((result) => {
+      res.json(result)
     })
     .catch((err) => {
       util.logError(err)
@@ -105,6 +104,18 @@ router.post('/addbook', (req, res) => {
     })
 })
 
+router.post('/addprize', (req, res) => {
+  const prizeData = req.body
+  console.log(prizeData)
+  db.addurnData(prizeData)
+    .then(() => {
+      res.sendStatus(201)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+
 //POST /api/v1/addtoprize
 router.post('/addtoprize', (req, res) => {
   const bookData = req.body[0]
@@ -117,6 +128,50 @@ router.post('/addtoprize', (req, res) => {
     })
     .catch((err) => {
       console.log(err)
+      util.logError(err)
+    })
+})
+
+router.post('/addlist', (req, res) => {
+  const listData = req.body
+  console.log(listData)
+  db.addurnData(listData)
+    .then(() => {
+      res.sendStatus(201)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+
+router.post('/addbooktolist', (req, res) => {
+  console.log(req.body)
+  db.addBookToList(req.body)
+    .then(() => {
+      res.sendStatus(201)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+
+router.get('/lists', (req, res) => {
+  db.getAllLists()
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+
+router.get('/lists/:listId/books', (req, res) => {
+  let id = req.params.listId
+  db.getBooksByList(id)
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
       util.logError(err)
     })
 })
