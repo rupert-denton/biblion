@@ -13,6 +13,18 @@ export function getAllPrizes() {
     })
 }
 
+export function getAllBooks() {
+  return request
+    .get(`${url}books`)
+    .then((response) => {
+      const books = response.body
+      return books
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
 export function getPrizeById(id) {
   return request
     .get(`${url}prize/${id}`)
@@ -73,6 +85,18 @@ export function getBooksByAuthor(id) {
     })
 }
 
+export function getAllLists() {
+  return request
+    .get(`${url}lists`)
+    .then((response) => {
+      const lists = response.body
+      return lists
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
 // posts
 export function postNewPrize(data) {
   console.log(data)
@@ -105,6 +129,34 @@ export function postBooksToPrize(data) {
   console.log(data)
   return request
     .post(`${url}addtoprize`)
+    .send(data)
+    .set('Accept', 'application/json')
+    .then((response) => {
+      console.log('yay got ' + JSON.stringify(response.body))
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+export function postNewList(data) {
+  console.log(data)
+  return request
+    .post(`${url}addlist`)
+    .send(data)
+    .set('Accept', 'application/json')
+    .then((response) => {
+      console.log('Successfully posted' + JSON.stringify(response.body))
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+export function postBooksToList(data) {
+  console.log(data)
+  return request
+    .post(`${url}addbooktolist`)
     .send(data)
     .set('Accept', 'application/json')
     .then((response) => {
