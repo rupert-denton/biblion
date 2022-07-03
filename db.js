@@ -34,6 +34,18 @@ function getBooksByPrize(id) {
     })
 }
 
+function getAllLists() {
+  return db('lists').select()
+}
+
+function getAllListsWithBooks() {
+  return db('booklists')
+    .join('lists', 'booklists.list_id', 'lists.id')
+    .join('books', 'booklists.book_id', 'books.id')
+    .join('authors', 'books.author', 'authors.id')
+    .select()
+}
+
 function getBooksByList(id) {
   return db('booklists')
     .join('books', 'booklists.book_id', 'books.id')
@@ -138,9 +150,6 @@ async function addBookToList(bookListObject) {
   return await db('booklists').insert(bookListObject)
 }
 
-function getAllLists() {
-  return db('lists').select()
-}
 async function addBooksToPrizes(bookData, authorData, prizeData) {
   await joinAuthorToBook(bookData, authorData)
   const author_id = await addurnData(authorData)
@@ -173,4 +182,5 @@ module.exports = {
   addBookToList,
   getAllLists,
   getBooksByList,
+  getAllListsWithBooks,
 }

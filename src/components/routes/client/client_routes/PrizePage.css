@@ -9,6 +9,9 @@
 
 }
 
+.list-container{
+  border-top: solid;
+}
 
 
 .year{
@@ -16,6 +19,7 @@
   margin-left: 1rem;
   font-size: 1.5rem;
 }
+
 
 .book-card-container{
   height: 30rem;
@@ -31,9 +35,42 @@
     height: 87%;
     margin: 1rem;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
+
+.book-card:hover{
+  cursor: pointer;
+}
+
+.book-link{
+  text-decoration: none;
+  color: black;
+}
+
+.book-info{
+  display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.book-title{
+  font-weight: 600;
+  height: 1.5rem;
+    max-width: 15rem;
+    overflow: hidden;
+    padding-top: 0.7rem;
+}
+
+
+.book-title-overflow:hover{
+  height: 6rem;
+  overflow: visible;
+}
+.author-name{
+  font-weight: 300;
+}
+
 
 .book-card-image{
   height: 70%;

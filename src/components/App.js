@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import * as api from '../apiClient'
 import { useEffect, useState } from 'react'
 import Navbar from './ui/Navbar'
+import Lists from './widgets/Lists'
 
 export default function App() {
   const [prizesData, setPrizesData] = useState([{}])
@@ -30,7 +31,12 @@ export default function App() {
   return (
     <div className="App">
       <Navbar />
-      <div className="homepage-container">{prizes}</div>
+      <div className="homepage-container">
+        <div className="prizes-container">{prizes}</div>
+        <div className="lists-container">
+          <Lists />
+        </div>
+      </div>
     </div>
   )
 }

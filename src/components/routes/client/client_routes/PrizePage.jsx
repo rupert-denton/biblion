@@ -41,41 +41,39 @@ export default function PrizePage() {
 
   const books2021 = arr2021.map((book, id) => {
     return (
-      <div className="book-card" key={id}>
-        <div className="book-card-image">
-          <img
-            className="cover-image"
-            src={book.cover_image}
-            alt="The book cover"
-          />
+      <Link className="book-link" to={`/books/${book.book_id}`}>
+        <div className="book-card" key={id}>
+          <div className="book-card-image">
+            <img
+              className="cover-image"
+              src={book.cover_image}
+              alt="The book cover"
+            />
+          </div>
+          <div className="book-info">
+            <div className="book-title">{book.title}</div>
+            <div className="author-name">{book.name}</div>
+          </div>
         </div>
-        <div className="book-title">
-          <Link to={`/books/${book.book_id}`}>
-            {book.title}: {book.year}
-          </Link>
-        </div>
-        <div className="author-name">{book.name}</div>
-      </div>
+      </Link>
     )
   })
 
   const books2020 = arr2020.map((book, id) => {
     return (
-      <div className="book-card" key={id}>
-        <div className="book-card-image">
-          <img
-            className="cover-image"
-            src={book.cover_image}
-            alt="The book cover"
-          />
+      <Link className="book-link" to={`/books/${book.book_id}`} key={id}>
+        <div className="book-card">
+          <div className="book-card-image">
+            <img
+              className="cover-image"
+              src={book.cover_image}
+              alt="The book cover"
+            />
+          </div>
+          <div className="book-title">{book.title}</div>
+          <div className="author-name">{book.name}</div>
         </div>
-        <div className="book-title">
-          <Link to={`/books/${book.book_id}`}>
-            {book.title}: {book.year}
-          </Link>
-        </div>
-        <div className="author-name">{book.name}</div>
-      </div>
+      </Link>
     )
   })
 

@@ -97,6 +97,32 @@ export function getAllLists() {
     })
 }
 
+export function getBooksOnListById(id) {
+  console.log(id)
+  return request
+    .get(`${url}/lists/${id}/books`)
+    .then((response) => {
+      const lists = response.body
+      console.log(lists)
+      return lists
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+export function getListsWithBooks() {
+  return request
+    .get(`${url}listswithbooks`)
+    .then((response) => {
+      const lists = response.body
+      return lists
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
 // posts
 export function postNewPrize(data) {
   console.log(data)

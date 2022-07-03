@@ -11,6 +11,8 @@ import AddBook from './components/routes/curator/curator_routes/AddBook'
 import PrizePage from './components/routes/client/client_routes/PrizePage'
 import BookPage from './components/routes/client/client_routes/BookPage'
 import AuthorPage from './components/routes/client/client_routes/AuthorPage'
+import AddList from './components/routes/curator/curator_routes/AddList'
+import AddBookToList from './components/routes/curator/curator_routes/AddBookToList'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   // <React.StrictMode>
@@ -26,6 +28,8 @@ root.render(
       <Route path="/curator" element={<Curator />} />
       <Route path="/curator/addprize" element={<AddPrize />} />
       <Route path="/curator/addbooktoprize" element={<AddBook />} />
+      <Route path="/curator/addlist" element={<AddList />} />
+      <Route path="/curator/addbooktolist" element={<AddBookToList />} />
     </Routes>
   </Router>
   // </React.StrictMode>

@@ -8,11 +8,19 @@ export default function Curator() {
       <Navbar />
 
       <h1 className="heading">Curator</h1>
+      <h2 className="subheading">Prizes</h2>
       <h3 className="curator-link">
         <Link to={'/curator/addprize'}>Add a New Prize</Link>
       </h3>
       <h3 className="curator-link">
         <Link to={'/curator/addbooktoprize'}>Add Books to Prize</Link>
+      </h3>
+      <h2 className="subheading">Lists</h2>
+      <h3 className="curator-link">
+        <Link to={'/curator/addlist'}>Add a New List</Link>
+      </h3>
+      <h3 className="curator-link">
+        <Link to={'/curator/addbooktolist'}>Add Books to List</Link>
       </h3>
     </div>
   )

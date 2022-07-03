@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
   height: 100vh;
 }
 
@@ -7,13 +6,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
   justify-content: center;
+  margin-top: 3rem;
+}
+
+.prizes-container{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  align-items: center;
+  margin-bottom: 3rem;
 }
 
 .prize-container{
+  flex-direction: column;
   border-style: solid;
-    width: 85%;
+    width: 90%;
     height: 14rem;
     margin-bottom: .5rem;
     display: flex;

@@ -13,6 +13,7 @@ const {
   addBookToList,
   getAllLists,
   getBooksByList,
+  getAllListsWithBooks,
 } = require('./db')
 
 const config = require('./knexfile')
@@ -223,6 +224,13 @@ describe('create, add books to lists, get books from lists', () => {
     expect.assertions(1)
     return getAllLists().then((result) => {
       expect(result[0].list_name).toBe('LGBTQI')
+    })
+  })
+
+  test('get all lists with books', () => {
+    expect.assertions(1)
+    return getAllListsWithBooks().then((result) => {
+      expect(result[0].title).toBe('Shuggie Bain')
     })
   })
 

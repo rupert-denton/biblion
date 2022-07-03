@@ -165,6 +165,16 @@ router.get('/lists', (req, res) => {
     })
 })
 
+router.get('/listswithbooks', (req, res) => {
+  db.getAllListsWithBooks()
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+
 router.get('/lists/:listId/books', (req, res) => {
   let id = req.params.listId
   db.getBooksByList(id)

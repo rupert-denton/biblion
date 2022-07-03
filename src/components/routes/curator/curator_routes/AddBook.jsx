@@ -64,7 +64,6 @@ export default function AddBook() {
     <form onSubmit={handleSubmit}>
       <div className="curator-container">
         <h1 className="heading">Book Details</h1>
-
         <div className="prize-details-container">
           <div className="prize-details">
             <select
