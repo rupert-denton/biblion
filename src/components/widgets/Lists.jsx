@@ -32,7 +32,7 @@ export default function Lists(props) {
           </div>
           <div className="book-info">
             <div className="book-title">{book.title}</div>
-            <div className="author-name">{book.name}</div>
+            <div className="book-page-author">{book.name}</div>
           </div>
         </div>
       </Link>
