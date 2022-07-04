@@ -27,7 +27,6 @@
 .author-image-container{
   height: 8rem;
   margin-right: 2rem;
-
 }
 
 .book-image{
@@ -56,8 +55,6 @@
     justify-content: center;
 }
 
-
-
 .book-page-title{
   font-weight: 600;
   font-size: 2rem;
@@ -75,4 +72,22 @@
 
 .paragraph-text{
   margin-bottom:1rem
+}
+
+@media screen and (max-width: 600px) {
+
+  .book-title-author-container{
+    margin-top: 1rem
+  }
+  .book-info-container{
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .author-info-container{
+    display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      margin-top: 2rem;
+  }
 }
