@@ -24,10 +24,14 @@
   font-size: 1.65rem;
   font-weight: 500;
   text-decoration: none;
+  border-style: solid;
+  border-color: black;
+  border-radius: .2rem;
+  padding: .3rem
+
 }
 
 .biblion-logo:hover{
-  padding:.2rem;
   border-style: solid;
   border-color: white;
   transition: 0.1s;
