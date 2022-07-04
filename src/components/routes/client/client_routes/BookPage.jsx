@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import * as api from '../../../../apiClient'
 import Navbar from '../../../ui/Navbar'
+import './BookPage.css'
 
 export default function BookPage() {
   let { bookId } = useParams()
@@ -20,6 +21,7 @@ export default function BookPage() {
         console.log(err)
       })
   }, [])
+
   console.log(bookInfo)
 
   const {
@@ -50,12 +52,41 @@ export default function BookPage() {
     : ''
 
   return (
-    <div>
+    <React.Fragment>
       <Navbar />
-      <div>{title}</div>
-      <img src={cover_image} alt="the book cover" />
-      <Link to={`/authors/${author_id}`}>{author_name}</Link>
-      <div>{bookParagraphs}</div>
-    </div>
+      <div className="book-page">
+        <div className="book-info-container">
+          <div className="book-image-container">
+            <img
+              className="book-image"
+              src={cover_image}
+              alt="the book cover"
+            />
+          </div>
+          <div className="book-info">
+            <div className="book-title-author-container">
+              <div className="book-page-title">{title}</div>
+              <div className="book-page-author">{author_name}</div>
+            </div>
+            <div className="book-blurb">
+              <div>{bookParagraphs}</div>
+            </div>
+            <div className="author-info-container">
+              <div className="book-image-container author-image-container">
+                <img className="author-image" src={image} alt="the author" />
+              </div>
+              <div className="author-info">
+                <div className="book-title-author-container">
+                  <div className="author-name">About {author_name}</div>
+                </div>
+                <div className="author-bio">
+                  <div>{bio}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
   )
 }

@@ -7,18 +7,34 @@ import Lists from './widgets/Lists'
 
 export default function App() {
   const [prizesData, setPrizesData] = useState([{}])
+  const [listArray, setListArray] = useState([])
+
   useEffect(() => {
     api
       .getAllPrizes()
       .then((prizesData) => {
         setPrizesData(prizesData)
-        console.log(prizesData)
         return null
       })
       .catch((err) => {
         console.log(err)
       })
   }, [])
+
+  useEffect(() => {
+    api
+      .getAllLists()
+      .then((lists) => {
+        setListArray(lists)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
+
+  const listsForDisplay = listArray.map((list, id) => {
+    return <Lists key={id} listData={list} />
+  })
 
   const prizes = prizesData.map((prize, id) => {
     return (
@@ -33,9 +49,7 @@ export default function App() {
       <Navbar />
       <div className="homepage-container">
         <div className="prizes-container">{prizes}</div>
-        <div className="lists-container">
-          <Lists />
-        </div>
+        <div className="lists-container">{listsForDisplay}</div>
       </div>
     </div>
   )

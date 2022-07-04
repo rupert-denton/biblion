@@ -1,0 +1,78 @@
+.book-page{
+  padding: 3rem;
+  background: #f6f6f6;
+}
+
+.book-info-container{
+  display: grid;
+  grid-template-columns: 2fr 4fr;
+}
+
+
+.book-image-container{
+  height: 27rem;
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.author-info-container{
+  display: grid;
+    grid-template-columns: 1fr 4fr;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.author-image-container{
+  height: 8rem;
+  margin-right: 2rem;
+
+}
+
+.book-image{
+  height: 100%;
+  box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
+}
+
+.author-name{
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  text-decoration: underline;
+
+}
+
+.author-image{
+  height: 100%;
+  box-shadow: none;
+  filter: grayscale(100%);
+}
+
+.book-info{
+     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+
+
+.book-page-title{
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.book-page-author{
+  font-weight: 300;
+}
+
+.book-blurb{
+  padding: 1rem 0;
+  margin-top: 2rem;
+  border-style: solid none;
+}
+
+.paragraph-text{
+  margin-bottom:1rem
+}

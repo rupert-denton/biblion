@@ -34,6 +34,21 @@ function getBooksByPrize(id) {
     })
 }
 
+function getBooksByPrizeAndYear(id, year) {
+  console.log(id, year)
+  return db('prizes')
+    .select()
+    .where({ id })
+    .then((result) => {
+      return db('booksprizes')
+        .join('books', 'booksprizes.book_id', 'books.id')
+        .join('authors', 'booksprizes.author_id', 'authors.id')
+        .select()
+        .where('booksprizes.prize_id', id)
+        .where('booksprizes.year', year)
+    })
+}
+
 function getAllLists() {
   return db('lists').select()
 }
@@ -166,6 +181,10 @@ async function addBooksToPrizes(bookData, authorData, prizeData) {
   return await db('booksprizes').insert(prize_info)
 }
 
+function getPrizeYears(prizeId) {
+  return db('booksprizes').distinct('year').where('prize_id', prizeId)
+}
+
 module.exports = {
   db,
   getAllBooks,
@@ -183,4 +202,6 @@ module.exports = {
   getAllLists,
   getBooksByList,
   getAllListsWithBooks,
+  getBooksByPrizeAndYear,
+  getPrizeYears,
 }

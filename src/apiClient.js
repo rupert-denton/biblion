@@ -49,6 +49,45 @@ export function getBooksByPrize(id) {
     })
 }
 
+export function getBooksByPrizeAndYear(id, year) {
+  console.log('Hello!')
+  return request
+    .get(`${url}prize/${year}/${id}/books`)
+    .then((response) => {
+      const prizeBooks = response.body
+      return prizeBooks
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+export function getPrizeYears(id) {
+  console.log(id)
+  return request
+    .get(`${url}prizeyears/${id}`)
+    .then((response) => {
+      const prizeYears = response.body
+      return prizeYears
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+export function getBooksOnListById(id) {
+  console.log('Running Function')
+  return request
+    .get(`${url}/lists/${id}/books`)
+    .then((response) => {
+      const lists = response.body
+      return lists
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
 export function getBookById(id) {
   return request
     .get(`${url}books/${id}`)
@@ -90,20 +129,6 @@ export function getAllLists() {
     .get(`${url}lists`)
     .then((response) => {
       const lists = response.body
-      return lists
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-}
-
-export function getBooksOnListById(id) {
-  console.log(id)
-  return request
-    .get(`${url}/lists/${id}/books`)
-    .then((response) => {
-      const lists = response.body
-      console.log(lists)
       return lists
     })
     .catch((err) => {

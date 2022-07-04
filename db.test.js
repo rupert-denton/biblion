@@ -14,6 +14,7 @@ const {
   getAllLists,
   getBooksByList,
   getAllListsWithBooks,
+  getBooksByPrizeAndYear,
 } = require('./db')
 
 const config = require('./knexfile')
@@ -92,6 +93,13 @@ describe('getBooksByPrize', () => {
       expect(result[0].title).toBe('The Promise')
       expect(result[1].title).toBe('Shuggie Bain')
       expect(result[1].name).toBe('Douglas Stuart')
+    })
+  })
+
+  test('get book by prize year and id', () => {
+    expect.assertions(1)
+    return getBooksByPrizeAndYear(1, 2021).then((result) => {
+      expect(result[0].title).toBe('The Promise')
     })
   })
 })

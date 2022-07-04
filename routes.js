@@ -18,8 +18,35 @@ router.get('/', (req, res) => {
     })
 })
 
+router.get('/prizeyears/:prizeId', (req, res) => {
+  let id = req.params.prizeId
+  console.log(id)
+  db.getPrizeYears(id)
+    .then((result) => {
+      console.log(result)
+      res.json(result)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+
 //resource for prize page
 // GET /prizes/:prizeId - information about the prize
+
+router.get('/prize/:year/:prizeId/books', (req, res) => {
+  let id = req.params.prizeId
+  let year = req.params.year
+  console.log(id)
+  db.getBooksByPrizeAndYear(id, year)
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+
 router.get('/prize/:prizeId', (req, res) => {
   let id = req.params.prizeId
   db.getPrizeById(id)
@@ -30,6 +57,7 @@ router.get('/prize/:prizeId', (req, res) => {
       util.logError(err)
     })
 })
+
 // GET /prize/:prizeId/books - [{ name:, blurb:, ISBN:, author: { name:, } }, book, book]
 router.get('/prize/:prizeId/books', (req, res) => {
   let id = req.params.prizeId
@@ -41,6 +69,8 @@ router.get('/prize/:prizeId/books', (req, res) => {
       util.logError(err)
     })
 })
+
+// GET /prize/:prizeId/books - [{ name:, blurb:, ISBN:, author: { name:, } }, book, book]
 
 //resource for book page
 // GET /books/:bookId - { name:, blurb:, ISBN:, author: {} }

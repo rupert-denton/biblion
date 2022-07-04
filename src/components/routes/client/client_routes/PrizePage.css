@@ -6,8 +6,10 @@
 }
 
 .prize-winners-group{
-
+  padding-top: 1rem;
+  padding-left: 1rem;
 }
+
 
 .list-container{
   border-top: solid;
@@ -67,6 +69,7 @@
   height: 6rem;
   overflow: visible;
 }
+
 .author-name{
   font-weight: 300;
 }
@@ -78,4 +81,13 @@
 
 .cover-image{
   height: 100%;
+}
+
+.prize-winners-by-year{
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.header-year{
+  font-size: 1.5rem;
 }

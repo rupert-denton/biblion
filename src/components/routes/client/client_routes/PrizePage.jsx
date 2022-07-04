@@ -4,14 +4,13 @@ import { Link, useParams } from 'react-router-dom'
 import * as api from '../../../../apiClient'
 import './PrizePage.css'
 import Navbar from '../../../ui/Navbar'
+import PrizeLists from '../../../widgets/PrizeLists'
 
 export default function PrizePage() {
   let { prizeId } = useParams()
   const [prizeInfo, setPrizeInfo] = useState({})
-  const [bookArr, setbookArr] = useState([{}])
+  const [prizeYears, setPrizeYears] = useState([])
 
-  console.log(prizeInfo)
-  console.log(bookArr)
   useEffect(() => {
     api
       .getPrizeById(prizeId)
@@ -26,9 +25,9 @@ export default function PrizePage() {
 
   useEffect(() => {
     api
-      .getBooksByPrize(prizeId)
-      .then((bookArr) => {
-        setbookArr(bookArr)
+      .getPrizeYears(prizeId)
+      .then((prizeInfo) => {
+        setPrizeYears(prizeInfo)
         return null
       })
       .catch((err) => {
@@ -36,45 +35,23 @@ export default function PrizePage() {
       })
   }, [prizeId])
 
-  const arr2021 = bookArr.filter((book) => book.year === 2021)
-  const arr2020 = bookArr.filter((book) => book.year === 2020)
+  console.log(prizeYears)
 
-  const books2021 = arr2021.map((book, id) => {
-    return (
-      <Link className="book-link" to={`/books/${book.book_id}`}>
-        <div className="book-card" key={id}>
-          <div className="book-card-image">
-            <img
-              className="cover-image"
-              src={book.cover_image}
-              alt="The book cover"
-            />
-          </div>
-          <div className="book-info">
-            <div className="book-title">{book.title}</div>
-            <div className="author-name">{book.name}</div>
-          </div>
-        </div>
-      </Link>
-    )
-  })
+  // useEffect(() => {
+  //   api
+  //     .getBooksByPrize(prizeId)
+  //     .then((books) => {
+  //       setBookArray(books)
+  //       return null
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }, [prizeId])
 
-  const books2020 = arr2020.map((book, id) => {
-    return (
-      <Link className="book-link" to={`/books/${book.book_id}`} key={id}>
-        <div className="book-card">
-          <div className="book-card-image">
-            <img
-              className="cover-image"
-              src={book.cover_image}
-              alt="The book cover"
-            />
-          </div>
-          <div className="book-title">{book.title}</div>
-          <div className="author-name">{book.name}</div>
-        </div>
-      </Link>
-    )
+  const booksByYear = prizeYears.map((year, id) => {
+    console.log(year)
+    return <PrizeLists key={id} prizeYear={year} prizeId={prizeId} />
   })
 
   return (
@@ -82,14 +59,7 @@ export default function PrizePage() {
       <Navbar />
       <div className="prize-page">
         <div className="prize-header">{prizeInfo.prize_name}</div>
-        <div className="prize-winners-group">
-          <div className="year">2021</div>
-          <div className="book-card-container">{books2021}</div>
-        </div>
-        <div className="prize-winners-group">
-          <div className="year">2020</div>
-          <div className="book-card-container">{books2020}</div>
-        </div>
+        <div className="prize-winners-by-year">{booksByYear}</div>
       </div>
     </React.Fragment>
   )
