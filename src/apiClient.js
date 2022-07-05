@@ -78,7 +78,7 @@ export function getPrizeYears(id) {
 export function getBooksOnListById(id) {
   console.log('Running Function')
   return request
-    .get(`${url}/lists/${id}/books`)
+    .get(`${url}lists/${id}/books`)
     .then((response) => {
       const lists = response.body
       return lists
