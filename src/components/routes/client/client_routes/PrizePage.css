@@ -66,11 +66,11 @@
     padding-top: 0.7rem;
 }
 
-
+/* 
 .book-title-overflow:hover{
   height: 6rem;
   overflow: visible;
-}
+} */
 
 .author-name{
   font-weight: 300;
