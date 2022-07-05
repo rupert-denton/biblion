@@ -79,6 +79,7 @@
   .book-title-author-container{
     margin-top: 1rem
   }
+  
   .book-info-container{
     display: grid;
     grid-template-columns: 1fr;
