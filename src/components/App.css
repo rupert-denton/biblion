@@ -22,6 +22,7 @@
 .prize-container{
   flex-direction: column;
   border-style: solid;
+  border-color: black;
     width: 90%;
     height: 14rem;
     margin-bottom: .5rem;
