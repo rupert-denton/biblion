@@ -12,24 +12,34 @@
 
 .prizes-container{
   display: flex;
-  flex-direction: column;
-  width: 90%;
-  align-items: center;
-  margin-bottom: 3rem;
-  padding: 1rem 1rem;
+    flex-direction: row;
+    width: 90%;
+    align-items: center;
+    margin-bottom: 3rem;
+    border-bottom: solid;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .prize-container{
   flex-direction: column;
   border-style: solid;
   border-color: black;
-    width: 90%;
-    height: 14rem;
-    margin-bottom: .5rem;
-    display: flex;
-    align-items: flex-end;
-    background-color: black;
-    text-decoration: none;
+  width: 8rem;
+  height: 8rem;
+  margin: .5rem;
+  display: flex;
+  align-items: flex-end;
+  background-color: black;
+  text-decoration: none;
+  padding: .5rem;
+}
+
+.prize-name{
+  font-size: 1.1rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
 }
 
 .prize-container:hover{
@@ -38,16 +48,10 @@
   transition: 0.4s;
 }
 
+
+
 .prize-container:hover .prize-name{ 
   color: black;
   transition: 0.4s;
 }
 
-.prize-name{
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-  font-size: 2rem;
-  color: white;
-  text-decoration: none;
-  font-weight: 700;
-}

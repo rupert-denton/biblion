@@ -2,8 +2,10 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import * as api from '../../apiClient'
+import './Lists.css'
 
 export default function Lists(props) {
+  console.log(props)
   console.log('On Lists Page')
   const [listArray, setListArray] = useState([])
 
@@ -42,7 +44,7 @@ export default function Lists(props) {
   return (
     <React.Fragment>
       <div className="list-container">
-        <div className="prize-header">{props.listData.list_name}</div>
+        <div className="list-name">{props.listData.list_name}</div>
         <div className="prize-winners-group">
           <div className="book-card-container">{books}</div>
         </div>

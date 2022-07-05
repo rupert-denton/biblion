@@ -8,7 +8,6 @@ import Lists from './widgets/Lists'
 export default function App() {
   const [prizesData, setPrizesData] = useState([{}])
   const [listArray, setListArray] = useState([])
-
   useEffect(() => {
     api
       .getAllPrizes()
@@ -33,7 +32,7 @@ export default function App() {
   }, [])
 
   const listsForDisplay = listArray.map((list, id) => {
-    return <Lists key={id} listData={list} />
+    return <Lists listData={list} />
   })
 
   const prizes = prizesData.map((prize, id) => {
@@ -48,6 +47,7 @@ export default function App() {
     <div className="App">
       <Navbar />
       <div className="homepage-container">
+        <div className="prize-header">Discover Award Winning Books</div>
         <div className="prizes-container">{prizes}</div>
         <div className="lists-container">{listsForDisplay}</div>
       </div>
