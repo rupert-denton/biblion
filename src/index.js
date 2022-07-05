@@ -7,12 +7,14 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Routes, Route } from 'react-router-dom'
 import Curator from './components/routes/curator/Curator'
 import AddPrize from './components/routes/curator/curator_routes/AddPrize'
-import AddBook from './components/routes/curator/curator_routes/AddBook'
+// import AddBook from './components/routes/curator/curator_routes/AddBook'
 import PrizePage from './components/routes/client/client_routes/PrizePage'
 import BookPage from './components/routes/client/client_routes/BookPage'
 import AuthorPage from './components/routes/client/client_routes/AuthorPage'
 import AddList from './components/routes/curator/curator_routes/AddList'
+import AddBookToPrize from './components/routes/curator/curator_routes/AddBookToPrize'
 import AddBookToList from './components/routes/curator/curator_routes/AddBookToList'
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   // <React.StrictMode>
@@ -27,7 +29,7 @@ root.render(
       {/* curator */}
       <Route path="/curator" element={<Curator />} />
       <Route path="/curator/addprize" element={<AddPrize />} />
-      <Route path="/curator/addbooktoprize" element={<AddBook />} />
+      <Route path="/curator/addbooktoprize" element={<AddBookToPrize />} />
       <Route path="/curator/addlist" element={<AddList />} />
       <Route path="/curator/addbooktolist" element={<AddBookToList />} />
     </Routes>

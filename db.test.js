@@ -208,7 +208,7 @@ describe('addBooksToPrizes', () => {
   }
 
   const prizeData = {
-    prize_name: 'The Booker Prize',
+    prize_id: 1,
     year: 2020,
     winner: true,
     shortlist: true,

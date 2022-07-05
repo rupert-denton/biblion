@@ -177,13 +177,12 @@ export function postBookWithAuthor(data) {
 }
 
 export function postBooksToPrize(data) {
-  console.log(data)
   return request
     .post(`${url}addtoprize`)
     .send(data)
     .set('Accept', 'application/json')
     .then((response) => {
-      console.log('yay got ' + JSON.stringify(response.body))
+      console.log('yay got ' + JSON.stringify(response))
     })
     .catch((err) => {
       console.log(err)

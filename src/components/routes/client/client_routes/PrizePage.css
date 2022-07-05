@@ -38,6 +38,7 @@
 
 .book-card{
   display: flex;
+
     height: 87%;
     margin: 1rem;
     flex-direction: column;
@@ -99,6 +100,14 @@
 }
 
 @media screen and (max-width: 600px) {
+
+.book-card{
+  width:12rem
+}
+
+.book-card-image{
+  width: 100%;
+}
 .book-card:hover .book-card-image{
   cursor: pointer;
 }

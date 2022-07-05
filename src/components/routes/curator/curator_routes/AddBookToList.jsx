@@ -52,7 +52,6 @@ export default function AddBookToList() {
     console.log(`Deleting: ${e.target.value}`)
   }
 
-  console.log(listArray)
   useEffect(() => {
     api
       .getAllLists()

@@ -35,7 +35,6 @@ function getBooksByPrize(id) {
 }
 
 function getBooksByPrizeAndYear(id, year) {
-  console.log(id, year)
   return db('prizes')
     .select()
     .where({ id })
@@ -169,7 +168,7 @@ async function addBooksToPrizes(bookData, authorData, prizeData) {
   await joinAuthorToBook(bookData, authorData)
   const author_id = await addurnData(authorData)
   const book_id = await addurnData(bookData)
-  const prize_id = await addurnData(prizeData)
+  const prize_id = prizeData.prize_id
   const prize_info = {
     ...prizeData,
     prize_id: prize_id,
