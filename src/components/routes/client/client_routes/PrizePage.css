@@ -11,6 +11,11 @@
   padding-left: 1rem;
 }
 
+.book-page-prize-winner-group{
+  width: 100%;
+  border-top: solid
+}
+
 .lists-container{
   width: 100%;
 }
@@ -35,7 +40,10 @@
   flex-direction: row;
   overflow-x: scroll;
   width: 100%;
+}
 
+.smaller-container{
+  height: 17rem
 }
 
 .book-card{

@@ -8,23 +8,26 @@ import './BookPage.css'
 export default function BookPage() {
   let { bookId } = useParams()
   const [bookInfo, setbookInfo] = useState({})
-  const [booksByAuthor, setBooksByAuthor] = useState({})
+  const [booksByAuthor, setBooksByAuthor] = useState([{}])
 
+  console.log(bookId)
   useEffect(() => {
     api
       .getBookById(bookId)
       .then((bookInfo) => {
         setbookInfo(bookInfo)
         api.getBooksByAuthor(bookInfo.author_id).then((books) => {
-          setBooksByAuthor(books)
-          console.log(booksByAuthor)
+          console.log(books[0].id)
+          let otherBooks = books.filter((bookObj) => bookObj.id !== bookId)
+          console.log(otherBooks)
+          setBooksByAuthor(otherBooks)
           return null
         })
       })
       .catch((err) => {
         console.log(err)
       })
-  }, [booksByAuthor.title])
+  }, [bookId])
 
   const {
     id,
@@ -52,35 +55,31 @@ export default function BookPage() {
       })
     : ''
 
-  const otherBooks =
-    Object.keys(booksByAuthor).length === 0
-      ? {}
-      : booksByAuthor.filter((object) => object.id !== bookInfo.id)
+  // const otherBooks =
+  //   Object.keys(booksByAuthor).length === 0
+  //     ? {}
+  //     : booksByAuthor.filter((object) => object.id !== bookInfo.id)
 
-  console.log(otherBooks)
-
-  const otherBooksForDisplay =
-    Object.keys(otherBooks).length === 0
-      ? ''
-      : otherBooks.map((book, i) => {
-          return (
-            <Link key={i} className="book-link" to={`/books/${book.id}`}>
-              <div className="book-card">
-                <div className="book-card-image">
-                  <img
-                    className="cover-image"
-                    src={book.cover_image}
-                    alt="The book cover"
-                  />
-                </div>
-                <div className="book-info">
-                  <div className="book-title">{book.title}</div>
-                  <div className="book-page-author">{book.name}</div>
-                </div>
-              </div>
-            </Link>
-          )
-        })
+  const otherBooksForDisplay = booksByAuthor.map((book, i) => {
+    console.log(book)
+    return (
+      <Link key={i} className="book-link" to={`/books/${book.id}`}>
+        <div className="book-card">
+          <div className="book-card-image">
+            <img
+              className="cover-image"
+              src={book.cover_image}
+              alt="The book cover"
+            />
+          </div>
+          <div className="book-info">
+            <div className="book-title">{book.title}</div>
+            <div className="book-page-author">{book.name}</div>
+          </div>
+        </div>
+      </Link>
+    )
+  })
 
   return (
     <React.Fragment>
@@ -114,10 +113,11 @@ export default function BookPage() {
                   <div>{bio}</div>
                 </div>
               </div>
-              <div className="prize-winners-group">
-                <div className="book-card-container">
-                  {otherBooksForDisplay}
-                </div>
+            </div>
+            <div className="prize-winners-group book-page-prize-winner-group">
+              <div className="author-name">Other books by {author_name}</div>
+              <div className="book-card-container smaller-container">
+                {otherBooksForDisplay}
               </div>
             </div>
           </div>

@@ -22,6 +22,7 @@
     grid-template-columns: 1fr 4fr;
     align-items: center;
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .author-image-container{
