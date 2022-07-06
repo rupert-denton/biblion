@@ -31,8 +31,8 @@ export default function App() {
       })
   }, [])
 
-  const listsForDisplay = listArray.map((list, id) => {
-    return <Lists listData={list} />
+  const listsForDisplay = listArray.map((list, i) => {
+    return <Lists key={i} listData={list} />
   })
 
   const prizes = prizesData.map((prize, id) => {

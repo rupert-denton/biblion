@@ -5,8 +5,6 @@ import * as api from '../../apiClient'
 import './Lists.css'
 
 export default function Lists(props) {
-  console.log(props)
-  console.log('On Lists Page')
   const [listArray, setListArray] = useState([])
 
   useEffect(() => {

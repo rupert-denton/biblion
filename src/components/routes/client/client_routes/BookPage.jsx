@@ -10,17 +10,13 @@ export default function BookPage() {
   const [bookInfo, setbookInfo] = useState({})
   const [booksByAuthor, setBooksByAuthor] = useState([{}])
 
-  console.log(bookId)
   useEffect(() => {
     api
       .getBookById(bookId)
       .then((bookInfo) => {
         setbookInfo(bookInfo)
-        api.getBooksByAuthor(bookInfo.author_id).then((books) => {
-          console.log(books[0].id)
-          let otherBooks = books.filter((bookObj) => bookObj.id !== bookId)
-          console.log(otherBooks)
-          setBooksByAuthor(otherBooks)
+        api.getOtherBooksByAuthor(bookInfo.author_id, bookId).then((books) => {
+          setBooksByAuthor(books)
           return null
         })
       })
@@ -29,19 +25,7 @@ export default function BookPage() {
       })
   }, [bookId])
 
-  const {
-    id,
-    title,
-    blurb,
-    author,
-    cover_image,
-    pub_year,
-    genre,
-    author_id,
-    author_name,
-    bio,
-    image,
-  } = bookInfo
+  const { title, cover_image, author_name, bio, image } = bookInfo
 
   const bookBlurb = bookInfo.blurb ? bookInfo.blurb.split(/\r?\n/) : ''
 
@@ -55,13 +39,7 @@ export default function BookPage() {
       })
     : ''
 
-  // const otherBooks =
-  //   Object.keys(booksByAuthor).length === 0
-  //     ? {}
-  //     : booksByAuthor.filter((object) => object.id !== bookInfo.id)
-
   const otherBooksForDisplay = booksByAuthor.map((book, i) => {
-    console.log(book)
     return (
       <Link key={i} className="book-link" to={`/books/${book.id}`}>
         <div className="book-card">

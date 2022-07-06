@@ -11,8 +11,14 @@ function getAllAuthors() {
 }
 
 function getBooksByAuthor(id) {
-  console.log(id)
-  return db('books').select().where('author', id)
+  return db('books').select('*', 'books.id as book_id').where('author', id)
+}
+
+function getOtherBooksByAuthor(author_id, book_id) {
+  return db('books')
+    .select('*')
+    .where('author', author_id)
+    .whereNot('books.id', book_id)
 }
 
 function getAllPrizes() {
@@ -209,4 +215,5 @@ module.exports = {
   getAllListsWithBooks,
   getBooksByPrizeAndYear,
   getPrizeYears,
+  getOtherBooksByAuthor,
 }

@@ -114,6 +114,18 @@ router.get('/authors/:authorId/books', (req, res) => {
     })
 })
 
+router.get('/authors/:authorId/:bookId/otherbooks', (req, res) => {
+  let author_id = req.params.authorId
+  let book_id = req.params.bookId
+  db.getOtherBooksByAuthor(author_id, book_id)
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+
 //GET get all books
 router.get('/books', (req, res) => {
   db.getAllBooks()

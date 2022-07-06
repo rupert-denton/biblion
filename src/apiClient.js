@@ -88,7 +88,6 @@ export function getPrizeYears(id) {
 }
 
 export function getBooksOnListById(id) {
-  console.log('Running Function')
   return request
     .get(`${url}lists/${id}/books`)
     .then((response) => {
@@ -127,6 +126,18 @@ export function getAuthorById(id) {
 export function getBooksByAuthor(id) {
   return request
     .get(`${url}authors/${id}/books`)
+    .then((response) => {
+      const books = response.body
+      return books
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+export function getOtherBooksByAuthor(author_id, book_id) {
+  return request
+    .get(`${url}authors/${author_id}/${book_id}/otherbooks`)
     .then((response) => {
       const books = response.body
       return books
