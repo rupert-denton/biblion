@@ -3,9 +3,7 @@ const db = require('./db')
 const util = require('./helpers')
 const router = express.Router()
 
-// izes/:prizeId - prize page with all the details
 // resources
-//resource for home page
 
 // GET /api/v1 - Nobel, Pulitzer
 router.get('/', (req, res) => {
@@ -20,10 +18,8 @@ router.get('/', (req, res) => {
 
 router.get('/prizeyears/:prizeId', (req, res) => {
   let id = req.params.prizeId
-  console.log(id)
   db.getPrizeYears(id)
     .then((result) => {
-      console.log(result)
       res.json(result)
     })
     .catch((err) => {
@@ -37,7 +33,6 @@ router.get('/prizeyears/:prizeId', (req, res) => {
 router.get('/prize/:year/:prizeId/books', (req, res) => {
   let id = req.params.prizeId
   let year = req.params.year
-  console.log(id)
   db.getBooksByPrizeAndYear(id, year)
     .then((result) => {
       res.json(result)
@@ -78,16 +73,26 @@ router.get('/books/:bookId/', (req, res) => {
   let id = req.params.bookId
   db.getBookById(id)
     .then((result) => {
-      console.log(result)
       res.json(result)
     })
     .catch((err) => {
       util.logError(err)
     })
 })
+
 //resource for author page
 // GET /authors/:authorId - { name:, books: [{ name:, blurb:, ISBN: }] }
-router.get('/authors/:authorId/', (req, res) => {
+router.get('/authors', (req, res) => {
+  db.getAllAuthors()
+    .then((result) => {
+      res.json(result)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+
+router.get('/authors/:authorId', (req, res) => {
   let id = req.params.authorId
   db.getAuthorById(id)
     .then((result) => {
@@ -136,7 +141,6 @@ router.post('/addbook', (req, res) => {
 
 router.post('/addprize', (req, res) => {
   const prizeData = req.body
-  console.log(prizeData)
   db.addurnData(prizeData)
     .then(() => {
       res.sendStatus(201)
@@ -164,7 +168,6 @@ router.post('/addtoprize', (req, res) => {
 
 router.post('/addlist', (req, res) => {
   const listData = req.body
-  console.log(listData)
   db.addurnData(listData)
     .then(() => {
       res.sendStatus(201)
@@ -175,7 +178,6 @@ router.post('/addlist', (req, res) => {
 })
 
 router.post('/addbooktolist', (req, res) => {
-  console.log(req.body)
   db.addBookToList(req.body)
     .then(() => {
       res.sendStatus(201)

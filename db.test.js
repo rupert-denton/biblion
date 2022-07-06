@@ -181,11 +181,16 @@ describe('addBooksToAuthors', () => {
     image: 'https://edit.org/images/cat/book-covers-big-2019101610.jpg',
   }
 
+  const authorById = {
+    author_id: 2,
+  }
+
   test('joins an author to a book after checking if either exist', () => {
-    return joinAuthorToBook(bookData, authorData).then((result) => {
+    return joinAuthorToBook(bookData, authorById).then((result) => {
       return testDb('authorbooks')
         .select()
         .then((result) => {
+          console.log(result)
           expect(result).toHaveLength(4)
         })
     })

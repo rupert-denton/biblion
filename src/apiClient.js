@@ -25,6 +25,18 @@ export function getAllBooks() {
     })
 }
 
+export function getAllAuthors() {
+  return request
+    .get(`${url}authors`)
+    .then((response) => {
+      const authors = response.body
+      return authors
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
 export function getPrizeById(id) {
   return request
     .get(`${url}prize/${id}`)
@@ -163,9 +175,11 @@ export function postNewPrize(data) {
     })
 }
 
+//work on this
 export function postBookWithAuthor(data) {
+  console.log(data)
   return request
-    .post(url)
+    .post(`${url}addbook`)
     .send(data)
     .set('Accept', 'application/json')
     .then((response) => {

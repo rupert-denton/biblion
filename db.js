@@ -6,14 +6,13 @@ function getAllBooks() {
   return db('books').select()
 }
 
+function getAllAuthors() {
+  return db('authors').select()
+}
+
 function getBooksByAuthor(id) {
-  return db('authors')
-    .select()
-    .first()
-    .where({ id })
-    .then((result) => {
-      return db('authorbooks').join('books', 'books.author', result.id).select()
-    })
+  console.log(id)
+  return db('books').select().where('author', id)
 }
 
 function getAllPrizes() {
@@ -146,7 +145,13 @@ async function addData(tableName, data) {
 }
 
 async function joinAuthorToBook(bookData, authorData) {
-  const author_id = await addurnData(authorData)
+  console.log(authorData)
+  const author_id =
+    Object.keys(authorData)[0] === 'author_id'
+      ? authorData.author_id
+      : await addurnData(authorData)
+  console.log(`Author id is: ${author_id}`)
+
   const completedBookData = {
     ...bookData,
     author: author_id,
@@ -187,6 +192,7 @@ function getPrizeYears(prizeId) {
 module.exports = {
   db,
   getAllBooks,
+  getAllAuthors,
   getBooksByAuthor,
   getBooksAndPrizes,
   getBooksByPrize,

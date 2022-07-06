@@ -2,7 +2,7 @@ import './GlobalStyles.css'
 import React, { useState, useEffect } from 'react'
 import * as api from '../../../../apiClient'
 
-export default function AddBook() {
+export default function AddBookToPrize() {
   const [prizeArray, setPrizeArray] = useState([])
   const [bookData, setBookData] = useState({
     title: '',

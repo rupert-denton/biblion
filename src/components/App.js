@@ -47,8 +47,12 @@ export default function App() {
     <div className="App">
       <Navbar />
       <div className="homepage-container">
-        <div className="prize-header">Discover Award Winning Books</div>
-        <div className="prizes-container">{prizes}</div>
+        <div className="prizes">
+          <div className="prize-header">Discover Award Winning Books</div>
+          <div className="prizes-container">{prizes}</div>
+        </div>
+
+        <div className="prizes-lists-divider"></div>
         <div className="lists-container">{listsForDisplay}</div>
       </div>
     </div>

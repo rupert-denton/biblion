@@ -7,18 +7,24 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.prizes{
   margin-top: 3rem;
+  margin-bottom: 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .prizes-container{
   display: flex;
-    flex-direction: row;
-    width: 90%;
-    align-items: center;
-    margin-bottom: 3rem;
-    border-bottom: solid;
-    flex-wrap: wrap;
-    justify-content: center;
+  flex-direction: row;
+  width: 90%;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .prize-container{
@@ -49,9 +55,13 @@
 }
 
 
-
 .prize-container:hover .prize-name{ 
   color: black;
   transition: 0.4s;
+}
+
+.prizes-lists-divider{
+  width: 100%;
+  border-top: solid;
 }
 
