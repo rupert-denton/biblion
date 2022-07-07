@@ -14,27 +14,37 @@ import AuthorPage from './components/routes/client/client_routes/AuthorPage'
 import AddList from './components/routes/curator/curator_routes/AddList'
 import AddBookToPrize from './components/routes/curator/curator_routes/AddBookToPrize'
 import AddBookToList from './components/routes/curator/curator_routes/AddBookToList'
+import ManageResourcesDashboard from './components/routes/curator/curator_routes/ManageResourcesDashboard'
+import { ChakraProvider } from '@chakra-ui/react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   // <React.StrictMode>
-  <Router>
-    <Routes>
-      {/* client */}
-      <Route path="/" element={<App />} />
-      <Route path="/prize/:prizeId" element={<PrizePage />} />
-      <Route path="/books/:bookId" element={<BookPage />} />
-      <Route path="authors/:authorId" element={<AuthorPage />} />
+  <ChakraProvider>
+    <Router>
+      <Routes>
+        {/* client */}
 
-      {/* curator */}
-      <Route path="/curator" element={<Curator />} />
-      <Route path="/curator/addbook" element={<AddBook />} />
-      <Route path="/curator/addprize" element={<AddPrize />} />
-      <Route path="/curator/addbooktoprize" element={<AddBookToPrize />} />
-      <Route path="/curator/addlist" element={<AddList />} />
-      <Route path="/curator/addbooktolist" element={<AddBookToList />} />
-    </Routes>
-  </Router>
+        <Route path="/" element={<App />} />
+        <Route path="/prize/:prizeId" element={<PrizePage />} />
+        <Route path="/books/:bookId" element={<BookPage />} />
+        <Route path="authors/:authorId" element={<AuthorPage />} />
+
+        {/* curator */}
+        <Route path="/curator" element={<Curator />} />
+        <Route path="/curator/addbook" element={<AddBook />} />
+        <Route path="/curator/addprize" element={<AddPrize />} />
+        <Route path="/curator/addbooktoprize" element={<AddBookToPrize />} />
+        <Route path="/curator/addlist" element={<AddList />} />
+        <Route path="/curator/addbooktolist" element={<AddBookToList />} />
+        <Route
+          path="/curator/dashboard"
+          element={<ManageResourcesDashboard />}
+        />
+      </Routes>
+    </Router>
+  </ChakraProvider>
+
   // </React.StrictMode>
 )
 
