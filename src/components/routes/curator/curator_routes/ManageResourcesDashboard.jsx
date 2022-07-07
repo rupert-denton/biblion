@@ -5,6 +5,7 @@ import './ManageResourcesDashboard.css'
 import * as fakeProps from '../../../../test/testData'
 import DashTable from '../../../widgets/DashTable'
 import * as api from '../../../../apiClient'
+import Navbar from '../../../ui/Navbar'
 
 export default function ManageResourcesDashboard() {
   const [tableData, setTableData] = useState([{}])
@@ -23,6 +24,7 @@ export default function ManageResourcesDashboard() {
 
   return (
     <React.Fragment>
+      <Navbar />
       <DashTable tableData={tableData} />
     </React.Fragment>
   )

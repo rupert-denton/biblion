@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './DashTable.css'
 
 export default function DashTable(props) {
   const columnHeaders = props.tableData
@@ -11,7 +12,7 @@ export default function DashTable(props) {
     ? props.tableData.map((data, i) => {
         console.log(data)
         return (
-          <tr key={i}>
+          <tr key={i} className="table-row">
             <td>{data.id}</td>
             <td>{data.title}</td>
             <td className="table-blurb">{data.blurb}</td>
@@ -29,7 +30,7 @@ export default function DashTable(props) {
       <div className="dashboard-table-container">
         <div className="table-container">
           <table className="table">
-            <tr>{columnHeaders}</tr>
+            {columnHeaders}
             {tableRows}
           </table>
         </div>
