@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-} from '@chakra-ui/react'
-
 export default function DashTable(props) {
   const columnHeaders = props.tableData
     ? Object.keys(props.tableData[0]).map((key, i) => {
-        return <Th key={i}>{key.toUpperCase()}</Th>
+        return <th key={i}>{key.toUpperCase()}</th>
       })
     : ''
 
@@ -22,30 +11,29 @@ export default function DashTable(props) {
     ? props.tableData.map((data, i) => {
         console.log(data)
         return (
-          <Tr key={i}>
-            <Td>{data.id}</Td>
-            <Td>{data.title}</Td>
-            <Td className="table-blurb">{data.blurb}</Td>
-            <Td>{data.author}</Td>
-            <Td>{data.cover_image}</Td>
-            <Td>{data.pub_year}</Td>
-            <Td>{data.genre}</Td>
-          </Tr>
+          <tr key={i}>
+            <td>{data.id}</td>
+            <td>{data.title}</td>
+            <td className="table-blurb">{data.blurb}</td>
+            <td>{data.author}</td>
+            <td>{data.cover_image}</td>
+            <td>{data.pub_year}</td>
+            <td>{data.genre}</td>
+          </tr>
         )
       })
     : ''
 
   return (
-    <TableContainer>
-      <Table variant="simple">
-        <Thead>
-          <Tr>{columnHeaders}</Tr>
-        </Thead>
-        <Tbody>{tableRows}</Tbody>
-        <Tfoot>
-          <Tr>{columnHeaders}</Tr>
-        </Tfoot>
-      </Table>
-    </TableContainer>
+    <div>
+      <div className="dashboard-table-container">
+        <div className="table-container">
+          <table className="table">
+            <tr>{columnHeaders}</tr>
+            {tableRows}
+          </table>
+        </div>
+      </div>
+    </div>
   )
 }
