@@ -10,5 +10,15 @@ exports.seed = function (knex) {
       list_id: 1,
       book_id: 3,
     },
+    {
+      id: 3,
+      list_id: 2,
+      book_id: 2,
+    },
+    {
+      id: 4,
+      list_id: 2,
+      book_id: 3,
+    },
   ])
 }

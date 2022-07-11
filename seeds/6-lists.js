@@ -4,7 +4,11 @@ exports.seed = function (knex) {
       id: 1,
       list_name: 'LGBTQI',
       list_description: 'Books by queer authors',
-      book_id: 1,
+    },
+    {
+      id: 2,
+      list_name: 'Religious Books',
+      list_description: 'Books by religious authors',
     },
   ])
 }

@@ -15,6 +15,8 @@ const {
   getBooksByList,
   getAllListsWithBooks,
   getBooksByPrizeAndYear,
+  deleteJoins,
+  deleteData,
 } = require('./db')
 
 const config = require('./knexfile')
@@ -22,7 +24,7 @@ const knex = require('knex')
 const testDb = knex(config.test)
 
 //get it to pristine
-beforeAll(() => {
+beforeEach(() => {
   return db.migrate.latest()
 })
 beforeEach(() => {
@@ -190,7 +192,6 @@ describe('addBooksToAuthors', () => {
       return testDb('authorbooks')
         .select()
         .then((result) => {
-          console.log(result)
           expect(result).toHaveLength(4)
         })
     })
@@ -282,7 +283,68 @@ describe('create, add books to lists, get books from lists', () => {
       return testDb('booklists')
         .select()
         .then((booklists) => {
-          expect(booklists).toHaveLength(3)
+          expect(booklists).toHaveLength(5)
+        })
+    })
+  })
+})
+
+describe('delete data', () => {
+  test('delete joined lists', () => {
+    return deleteJoins(1, ['booklists'], 'list_id').then((result) => {
+      return testDb('booklists')
+        .select()
+        .then((booklists) => {
+          expect(booklists).toHaveLength(2)
+        })
+    })
+  })
+  test('delete joined items with multiple lists', () => {
+    return deleteJoins(
+      2,
+      ['booklists', 'booksprizes', 'authorbooks'],
+      'book_id'
+    ).then((result) => {
+      return testDb('booksprizes')
+        .select()
+        .then((booksprizes) => {
+          expect(booksprizes).toHaveLength(2)
+        })
+    })
+  })
+  test('delete list data by way of id', () => {
+    deleteData(1, 'lists').then(() => {
+      return testDb('lists')
+        .select()
+        .then((lists) => {
+          expect(lists).toHaveLength(1)
+        })
+    })
+  })
+  test('delete book data by way of id', () => {
+    return deleteData(1, 'books').then(() => {
+      return testDb('books')
+        .select()
+        .then((books) => {
+          expect(books).toHaveLength(2)
+        })
+    })
+  })
+  test('delete prizes data by way of id', () => {
+    return deleteData(1, 'prizes').then(() => {
+      return testDb('prizes')
+        .select()
+        .then((prizes) => {
+          expect(prizes).toHaveLength(1)
+        })
+    })
+  })
+  test('delete authors by way of id', () => {
+    return deleteData(1, 'authors').then(() => {
+      return testDb('authors')
+        .select()
+        .then((authors) => {
+          expect(authors).toHaveLength(2)
         })
     })
   })

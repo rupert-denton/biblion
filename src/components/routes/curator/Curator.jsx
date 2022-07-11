@@ -28,6 +28,10 @@ export default function Curator() {
       <h3 className="curator-link">
         <Link to={'/curator/addbooktolist'}>Add Books to List</Link>
       </h3>
+      <br></br>
+      <h3 className="curator-link">
+        <Link to={'/curator/dashboard'}>Data Tables</Link>
+      </h3>
     </div>
   )
 }

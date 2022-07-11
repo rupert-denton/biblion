@@ -241,3 +241,17 @@ export function postBooksToList(data) {
       console.log(err)
     })
 }
+
+export function deleteData(data) {
+  console.log(data)
+  return request
+    .post(`${url}delete`)
+    .send(data)
+    .set('Accept', 'application/json')
+    .then((response) => {
+      console.log('yay got ' + JSON.stringify(response.body))
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}

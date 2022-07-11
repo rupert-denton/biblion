@@ -15,7 +15,6 @@ import AddList from './components/routes/curator/curator_routes/AddList'
 import AddBookToPrize from './components/routes/curator/curator_routes/AddBookToPrize'
 import AddBookToList from './components/routes/curator/curator_routes/AddBookToList'
 import ManageResourcesDashboard from './components/routes/curator/curator_routes/ManageResourcesDashboard'
-import { ChakraProvider } from '@chakra-ui/react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

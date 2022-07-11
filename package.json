@@ -23,6 +23,7 @@
     "react-table": "^7.8.0",
     "run-p": "^0.0.0",
     "superagent": "^8.0.0",
+    "supertest": "^6.2.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

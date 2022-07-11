@@ -11,13 +11,13 @@ function getAllAuthors() {
 }
 
 function getBooksByAuthor(id) {
-  return db('books').select('*', 'books.id as book_id').where('author', id)
+  return db('books').select('*', 'books.id as book_id').where('author_id', id)
 }
 
 function getOtherBooksByAuthor(author_id, book_id) {
   return db('books')
     .select('*')
-    .where('author', author_id)
+    .where('author_id', author_id)
     .whereNot('books.id', book_id)
 }
 
@@ -61,21 +61,21 @@ function getAllListsWithBooks() {
   return db('booklists')
     .join('lists', 'booklists.list_id', 'lists.id')
     .join('books', 'booklists.book_id', 'books.id')
-    .join('authors', 'books.author', 'authors.id')
+    .join('authors', 'books.author_id', 'authors.id')
     .select()
 }
 
 function getBooksByList(id) {
   return db('booklists')
     .join('books', 'booklists.book_id', 'books.id')
-    .join('authors', 'books.author', 'authors.id')
+    .join('authors', 'books.author_id', 'authors.id')
     .select()
     .where('booklists.list_id', id)
 }
 
 function getBookById(id) {
   return db('books')
-    .join('authors', 'books.author', 'authors.id')
+    .join('authors', 'books.author_id', 'authors.id')
     .where('books.id', id)
     .select('*', 'authors.name as author_name', 'authors.id as author_id')
     .first()
@@ -151,16 +151,14 @@ async function addData(tableName, data) {
 }
 
 async function joinAuthorToBook(bookData, authorData) {
-  console.log(authorData)
   const author_id =
     Object.keys(authorData)[0] === 'author_id'
       ? authorData.author_id
       : await addurnData(authorData)
-  console.log(`Author id is: ${author_id}`)
 
   const completedBookData = {
     ...bookData,
-    author: author_id,
+    author_id: author_id,
   }
   const book_id = await addurnData(completedBookData)
 
@@ -195,6 +193,44 @@ function getPrizeYears(prizeId) {
   return db('booksprizes').distinct('year').where('prize_id', prizeId)
 }
 
+async function deleteJoins(id, joinedTables, idName) {
+  return Promise.all(
+    joinedTables.map((joinedTable) => {
+      return db(joinedTable).delete().where(idName, id)
+    })
+  )
+}
+
+async function deleteData(id, dataType) {
+  let table
+  let joinedTables
+  let idName
+
+  if (dataType === 'lists') {
+    table = 'lists'
+    joinedTables = ['booklists']
+    idName = 'list_id'
+  } else if (dataType === 'books') {
+    table = 'books'
+    joinedTables = ['booklists', 'authorbooks', 'booksprizes']
+    idName = 'book_id'
+  } else if (dataType === 'prizes') {
+    table = 'prizes'
+    joinedTables = ['booksprizes']
+    idName = 'prize_id'
+  } else if (dataType === 'authors') {
+    table = 'authors'
+    joinedTables = ['authorbooks', 'books', 'booksprizes']
+    idName = 'author_id'
+  } else {
+    return
+  }
+
+  return await deleteJoins(id, joinedTables, idName).then(() => {
+    return db(table).delete().where('id', id)
+  })
+}
+
 module.exports = {
   db,
   getAllBooks,
@@ -216,4 +252,6 @@ module.exports = {
   getBooksByPrizeAndYear,
   getPrizeYears,
   getOtherBooksByAuthor,
+  deleteJoins,
+  deleteData,
 }

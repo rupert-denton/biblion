@@ -6,46 +6,38 @@ import '@testing-library/jest-dom'
 
 import DashTable from '../DashTable'
 
-import { arrBooks } from '../../../test/testData'
+import { arrBooks, arrLists } from '../../../test/testData'
 
 describe('<PointsTable />', () => {
-  test('renders a dynamic column headers based on object keys', () => {
+  test('renders a dynamic column headers based on object keys from books array', () => {
     render(<DashTable tableData={arrBooks} />)
     const table = screen.getByRole('table')
-    expect(table).toBeInTheDocument()
     const columnHeaders = within(table).getAllByRole('columnheader')
-    expect(columnHeaders[0].textContent).toBe('TITLE')
-    expect(columnHeaders[1].textContent).toBe('BLURB')
-    expect(columnHeaders[2].textContent).toBe('COVER_IMAGE')
-    expect(columnHeaders[3].textContent).toBe('PUB_YEAR')
-    expect(columnHeaders[4].textContent).toBe('GENRE')
+    expect(table).toBeInTheDocument()
+    expect(columnHeaders[1].textContent).toBe('title')
   })
-  test('renders first row of data to table', () => {
+  test('renders a dynamic column headers based on object keys from lists array', () => {
+    render(<DashTable tableData={arrLists} />)
+    const table = screen.getByRole('table')
+    const columnHeaders = within(table).getAllByRole('columnheader')
+    expect(table).toBeInTheDocument()
+    expect(columnHeaders[1].textContent).toBe('list_name')
+  })
+
+  test('correctly prepares data for adding into table using array of books', () => {
     render(<DashTable tableData={arrBooks} />)
     const table = screen.getByRole('table')
     const firstRow = within(table).getAllByRole('row')[1]
-    const cells = within(firstRow).getAllByRole('gridcell')
-    expect(cells[0].textContent).toBe('The Koran')
-    expect(cells[1].textContent).toBe('Cool book Lorem Ipsum')
-    expect(cells[2].textContent).toBe(
-      'https://edit.org/images/cat/book-covers-big-2019101610.jpg'
+    const cells = within(firstRow).getAllByRole('cell')
+    expect(cells[1].textContent).toContain('The Koran')
+  })
+  test('correctly prepares data for adding into table using array of lists', () => {
+    render(<DashTable tableData={arrLists} />)
+    const table = screen.getByRole('table')
+    const firstRow = within(table).getAllByRole('row')[1]
+    const cells = within(firstRow).getAllByRole('cell')
+    expect(cells[1].textContent).toBe(
+      'Critically Acclaimed Novels by African Authors'
     )
-    expect(cells[3].textContent).toBe('2002')
-    expect(cells[4].textContent).toBe('Non-Fiction')
   })
 })
-// it('renders the data of one animal to the table', () => {
-//   render(<PointsTable petScores={petsWithScores} />)
-//   const table = screen.getByRole('table')
-//   const firstRow = within(table).getAllByRole('row')[1]
-//   const cells = within(firstRow).getAllByRole('gridcell')
-//   expect(cells[0].textContent).toBe('Betty')
-//   expect(cells[1].textContent).toBe('1001')
-//   expect(cells[2].textContent).toBe('🐶')
-// })
-// it('renders ten + 1 header rows to the table', () => {
-//   render(<PointsTable petScores={petsWithScores} />)
-//   const table = screen.getByRole('table')
-//   const rows = within(table).getAllByRole('row')
-//   expect(rows).toHaveLength(11)
-// })

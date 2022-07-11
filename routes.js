@@ -229,4 +229,20 @@ router.get('/lists/:listId/books', (req, res) => {
       util.logError(err)
     })
 })
+
+// DELETE /api/delete/:id
+router.post('/delete', (req, res) => {
+  console.log(req.body)
+  const id = Number(req.body.id)
+  const dataType = req.body.dataType
+
+  db.deleteData(id, dataType)
+    .then(() => {
+      res.sendStatus(204)
+    })
+    .catch((err) => {
+      util.logError(err)
+    })
+})
+
 module.exports = router
