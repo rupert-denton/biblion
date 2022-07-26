@@ -1,5 +1,5 @@
 // Update with your config settings.
-
+require('dotenv').config
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
@@ -8,8 +8,8 @@ module.exports = {
     client: 'postgresql', //how does the postgres client know where to look?
     connection: {
       database: 'bibliontest',
-      user: 'rupertdenton',
-      password: '41621#rde',
+      user: process.env.db_user,
+      password: process.env.db_pass,
     },
     pool: {
       min: 2,
@@ -24,8 +24,8 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'biblion',
-      user: 'rupertdenton',
-      password: '41621#rde',
+      user: process.env.db_user,
+      password: process.env.db_pass,
     },
     pool: {
       min: 2,
