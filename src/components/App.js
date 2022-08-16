@@ -1,39 +1,24 @@
 import './App.css'
 import { Link } from 'react-router-dom'
-import * as api from '../apiClient'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Navbar from './ui/Navbar'
 import Lists from './widgets/Lists'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchPrizeData } from '../store/prizes-actions'
+import { fetchListData } from '../store/lists-actions'
 
 export default function App() {
-  const [prizesData, setPrizesData] = useState([{}])
-  const [listArray, setListArray] = useState([])
-  useEffect(() => {
-    api
-      .getAllPrizes()
-      .then((prizesData) => {
-        setPrizesData(prizesData)
-        return null
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
+  const dispatch = useDispatch()
+  const prizesData = useSelector((state) => state.prizes.prizesArray)
+  const listsData = useSelector((state) => state.lists.listsArray)
 
   useEffect(() => {
-    api
-      .getAllLists()
-      .then((lists) => {
-        setListArray(lists)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
+    dispatch(fetchPrizeData())
+  }, [dispatch])
 
-  const listsForDisplay = listArray.map((list, i) => {
-    return <Lists key={i} listData={list} />
-  })
+  useEffect(() => {
+    dispatch(fetchListData())
+  }, [dispatch])
 
   const prizes = prizesData.map((prize, id) => {
     return (
@@ -43,12 +28,17 @@ export default function App() {
     )
   })
 
+  const listsForDisplay = listsData.map((list, i) => {
+    return <Lists key={i} listData={list} />
+  })
+
   return (
     <div className="App">
       <Navbar />
       <div className="homepage-container">
         <div className="prizes">
           <div className="prize-header">Discover Award Winning Books</div>
+          {/* here */}
           <div className="prizes-container">{prizes}</div>
         </div>
 

@@ -1,16 +1,13 @@
 //external dependencies
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import * as api from '../../../../apiClient'
 import Navbar from '../../../ui/Navbar'
 
 export default function AuthorPage() {
   let { authorId } = useParams()
   const [authorInfo, setAuthorInfo] = useState({})
-  const [booksByAuthor, setBooksByAuthor] = useState([{}])
-
-  console.log(authorInfo)
-  console.log(booksByAuthor)
+  const [setBooksByAuthor] = useState([{}])
 
   useEffect(() => {
     api
@@ -36,7 +33,7 @@ export default function AuthorPage() {
       })
   }, [authorId])
 
-  const { id, name, bio, image } = authorInfo
+  const { name, bio, image } = authorInfo
 
   return (
     <div>
