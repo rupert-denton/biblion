@@ -25,10 +25,7 @@ export default function AddBookToList() {
       })
   }
 
-  console.log(booksOnListArray)
-
   const handleSetList = (e) => {
-    console.log(e.target.value)
     setBooksOnListArray([{}])
     let id = e.target.value
     let key = e.target.name
@@ -41,7 +38,6 @@ export default function AddBookToList() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(bookListData)
     api.postBooksToList(bookListData).then((response) => {
       console.log(response)
     })
@@ -49,7 +45,6 @@ export default function AddBookToList() {
 
   const handleDeleteItem = (e) => {
     e.preventDefault()
-    console.log(`Deleting: ${e.target.value}`)
   }
 
   useEffect(() => {

@@ -70,8 +70,6 @@ export default function AddBookToPrize() {
       })
   }, [])
 
-  console.log(prizeArray)
-
   const prizeDropDown = prizeArray.map((prize, id) => {
     return (
       <option name="prize_id" value={prize.id} key={id}>

@@ -232,7 +232,6 @@ router.get('/lists/:listId/books', (req, res) => {
 
 // DELETE /api/delete/:id
 router.post('/delete', (req, res) => {
-  console.log(req.body)
   const id = Number(req.body.id)
   const dataType = req.body.dataType
 

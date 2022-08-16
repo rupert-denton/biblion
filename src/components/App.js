@@ -1,6 +1,6 @@
 import './App.css'
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Navbar from './ui/Navbar'
 import Lists from './widgets/Lists'
 import { useSelector, useDispatch } from 'react-redux'
