@@ -62,7 +62,6 @@ export function getBooksByPrize(id) {
 }
 
 export function getBooksByPrizeAndYear(id, year) {
-  console.log('Hello!')
   return request
     .get(`${url}prize/${year}/${id}/books`)
     .then((response) => {

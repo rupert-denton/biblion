@@ -1,12 +1,12 @@
 //external dependencies
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useState } from 'react'
 
 import './ManageResourcesDashboard.css'
 import DashTable from '../../../widgets/DashTable'
 import * as api from '../../../../apiClient'
 import Navbar from '../../../ui/Navbar'
 
-export default function ManageResourcesDashboard(props) {
+export default function ManageResourcesDashboard() {
   const [tableData, setTableData] = useState([{}])
   const [dataName, setDataName] = useState('')
 

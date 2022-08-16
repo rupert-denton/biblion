@@ -1,10 +1,9 @@
 //external dependencies
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import * as api from '../../apiClient'
 
 export default function PrizeLists(props) {
-  console.log(props)
   const [listArray, setListArray] = useState([])
 
   useEffect(() => {

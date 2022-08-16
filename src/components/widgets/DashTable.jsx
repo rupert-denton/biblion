@@ -1,5 +1,4 @@
-import { cookieStorageManager } from '@chakra-ui/react'
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTable, useRowSelect } from 'react-table'
 import * as api from '../../apiClient'
 // import './DashTable.css'
@@ -12,7 +11,6 @@ export default function DashTable(props) {
   useEffect(() => {
     setDataType(props.dataName)
   }, [props])
-  console.log(dataType)
 
   useEffect(() => {
     setHeaders(Object.keys(props.tableData[0]))
@@ -102,7 +100,6 @@ export default function DashTable(props) {
 
   function handleDelete(e) {
     e.preventDefault()
-    console.log(`Deleting: ${selected} from ${dataType}`)
     const dataForPost = {
       id: selected,
       dataType: dataType,

@@ -15,31 +15,35 @@ import AddList from './components/routes/curator/curator_routes/AddList'
 import AddBookToPrize from './components/routes/curator/curator_routes/AddBookToPrize'
 import AddBookToList from './components/routes/curator/curator_routes/AddBookToList'
 import ManageResourcesDashboard from './components/routes/curator/curator_routes/ManageResourcesDashboard'
+import { Provider } from 'react-redux'
+import store from './store'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  // <React.StrictMode>
-  <Router>
-    <Routes>
-      {/* client */}
+  <Provider store={store}>
+    <Router>
+      <Routes>
+        {/* client */}
 
-      <Route path="/" element={<App />} />
-      <Route path="/prize/:prizeId" element={<PrizePage />} />
-      <Route path="/books/:bookId" element={<BookPage />} />
-      <Route path="authors/:authorId" element={<AuthorPage />} />
+        <Route path="/" element={<App />} />
+        <Route path="/prize/:prizeId" element={<PrizePage />} />
+        <Route path="/books/:bookId" element={<BookPage />} />
+        <Route path="authors/:authorId" element={<AuthorPage />} />
 
-      {/* curator */}
-      <Route path="/curator" element={<Curator />} />
-      <Route path="/curator/addbook" element={<AddBook />} />
-      <Route path="/curator/addprize" element={<AddPrize />} />
-      <Route path="/curator/addbooktoprize" element={<AddBookToPrize />} />
-      <Route path="/curator/addlist" element={<AddList />} />
-      <Route path="/curator/addbooktolist" element={<AddBookToList />} />
-      <Route path="/curator/dashboard" element={<ManageResourcesDashboard />} />
-    </Routes>
-  </Router>
-
-  // </React.StrictMode>
+        {/* curator */}
+        <Route path="/curator" element={<Curator />} />
+        <Route path="/curator/addbook" element={<AddBook />} />
+        <Route path="/curator/addprize" element={<AddPrize />} />
+        <Route path="/curator/addbooktoprize" element={<AddBookToPrize />} />
+        <Route path="/curator/addlist" element={<AddList />} />
+        <Route path="/curator/addbooktolist" element={<AddBookToList />} />
+        <Route
+          path="/curator/dashboard"
+          element={<ManageResourcesDashboard />}
+        />
+      </Routes>
+    </Router>
+  </Provider>
 )
 
 // If you want to start measuring performance in your app, pass a function

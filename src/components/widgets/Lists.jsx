@@ -1,6 +1,6 @@
 //external dependencies
-import React, { useEffect, useState, useRef } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import * as api from '../../apiClient'
 import './Lists.css'
 

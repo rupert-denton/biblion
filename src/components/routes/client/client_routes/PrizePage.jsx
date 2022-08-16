@@ -1,6 +1,6 @@
 //external dependencies
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import * as api from '../../../../apiClient'
 import './PrizePage.css'
 import Navbar from '../../../ui/Navbar'
@@ -35,22 +35,7 @@ export default function PrizePage() {
       })
   }, [prizeId])
 
-  console.log(prizeYears)
-
-  // useEffect(() => {
-  //   api
-  //     .getBooksByPrize(prizeId)
-  //     .then((books) => {
-  //       setBookArray(books)
-  //       return null
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }, [prizeId])
-
   const booksByYear = prizeYears.map((year, id) => {
-    console.log(year)
     return <PrizeLists key={id} prizeYear={year} prizeId={prizeId} />
   })
 
