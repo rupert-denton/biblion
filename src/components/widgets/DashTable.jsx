@@ -5,6 +5,15 @@ import React, { useEffect, useState } from 'react'
 import { useTable, useRowSelect } from 'react-table'
 import * as api from '../../apiClient'
 import PropTypes from 'prop-types'
+import {
+  Table,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableBody,
+  TableCell,
+  Paper,
+} from '@mui/material'
 
 export default function DashTable({ dataName, tableData }) {
   const [headers, setHeaders] = useState([])
@@ -113,38 +122,38 @@ export default function DashTable({ dataName, tableData }) {
   return (
     <div>
       <div className="dashboard-table-container">
-        <div className="table-container">
-          <table className="table" {...getTableProps()}>
-            <thead>
+        <TableContainer className="table-container" component={Paper}>
+          <Table className="table" {...getTableProps()}>
+            <TableHead>
               {headerGroups.map((headerGroup, i) => (
-                <tr key={i} {...headerGroup.getHeaderGroupProps()}>
+                <TableRow key={i} {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column, j) => (
                     <th key={`${j}-${i}`} {...column.getHeaderProps()}>
                       {column.render('Header')}
                     </th>
                   ))}
-                </tr>
+                </TableRow>
               ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
+            </TableHead>
+            <TableBody {...getTableBodyProps()}>
               {rows.map((row, i) => {
                 prepareRow(row)
                 return (
-                  <tr key={i} {...row.getRowProps()}>
+                  <TableRow key={i} {...row.getRowProps()}>
                     {row.cells.map((cell, j) => {
                       return (
-                        <td key={j} {...cell.getCellProps()}>
+                        <TableCell key={j} {...cell.getCellProps()}>
                           {cell.render('Cell')}
-                        </td>
+                        </TableCell>
                       )
                     })}
-                  </tr>
+                  </TableRow>
                 )
               })}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
           <button onClick={handleDelete}>Delete Selected</button>
-        </div>
+        </TableContainer>
       </div>
     </div>
   )
