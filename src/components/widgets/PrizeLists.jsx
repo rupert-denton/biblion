@@ -2,13 +2,14 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as api from '../../apiClient'
+import PropTypes from 'prop-types'
 
-export default function PrizeLists(props) {
+export default function PrizeLists({ prizeYear, prizeId }) {
   const [listArray, setListArray] = useState([])
 
   useEffect(() => {
     api
-      .getBooksByPrizeAndYear(props.prizeId, props.prizeYear.year)
+      .getBooksByPrizeAndYear(prizeId, prizeYear.year)
       .then((result) => {
         setListArray(result)
         return null
@@ -16,7 +17,7 @@ export default function PrizeLists(props) {
       .catch((err) => {
         console.log(err)
       })
-  }, [props])
+  }, [prizeId])
 
   const books = listArray.map((book, id) => {
     return (
@@ -42,10 +43,15 @@ export default function PrizeLists(props) {
     <React.Fragment>
       <div className="list-container">
         <div className="prize-winners-group">
-          <div className="header-year">{props.prizeYear.year}</div>
+          <div className="header-year">{prizeYear.year}</div>
           <div className="book-card-container">{books}</div>
         </div>
       </div>
     </React.Fragment>
   )
+}
+
+PrizeLists.propTypes = {
+  prizeYear: PropTypes.object,
+  prizeId: PropTypes.any,
 }

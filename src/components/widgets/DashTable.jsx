@@ -1,29 +1,32 @@
+/* eslint react/prop-types: 0 */
+/* eslint-disable react/display-name */
+
 import React, { useEffect, useState } from 'react'
 import { useTable, useRowSelect } from 'react-table'
 import * as api from '../../apiClient'
-// import './DashTable.css'
+import PropTypes from 'prop-types'
 
-export default function DashTable(props) {
+export default function DashTable({ dataName, tableData }) {
   const [headers, setHeaders] = useState([])
   const [selected, setSelected] = useState('')
   const [dataType, setDataType] = useState('')
 
   useEffect(() => {
-    setDataType(props.dataName)
-  }, [props])
+    setDataType(dataName)
+  }, [dataName])
 
   useEffect(() => {
-    setHeaders(Object.keys(props.tableData[0]))
-  }, [props])
+    setHeaders(Object.keys(tableData[0]))
+  }, [tableData])
 
   const data = React.useMemo(
     () =>
-      props.tableData.map((object) =>
+      tableData.map((object) =>
         Object.fromEntries(
           Object.values(object).map((value, i) => [`col${i + 1}`, value])
         )
       ),
-    [props.tableData]
+    [tableData]
   )
 
   const columns = React.useMemo(
@@ -62,7 +65,7 @@ export default function DashTable(props) {
     rows,
     prepareRow,
     selectedFlatRows,
-    state: { selectedRowIds },
+    // state: { selectedRowIds },
   } = useTable(
     {
       columns,
@@ -145,4 +148,11 @@ export default function DashTable(props) {
       </div>
     </div>
   )
+}
+
+DashTable.displayName = 'DashTable'
+
+DashTable.propTypes = {
+  dataName: PropTypes.string,
+  tableData: PropTypes.array,
 }

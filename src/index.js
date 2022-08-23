@@ -16,34 +16,42 @@ import AddBookToPrize from './components/routes/curator/curator_routes/AddBookTo
 import AddBookToList from './components/routes/curator/curator_routes/AddBookToList'
 import ManageResourcesDashboard from './components/routes/curator/curator_routes/ManageResourcesDashboard'
 import { Provider } from 'react-redux'
+import { Auth0Provider } from '@auth0/auth0-react'
 import store from './store'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <Provider store={store}>
-    <Router>
-      <Routes>
-        {/* client */}
+  <Auth0Provider
+    domain={'mako2021-rupert.au.auth0.com'}
+    clientId={'mSSlJ4vov5nitzQfZmD5pj8bZNliMBvX'}
+    redirectUri={window.location.origin}
+    audience="https://biblion/api"
+  >
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          {/* client */}
 
-        <Route path="/" element={<App />} />
-        <Route path="/prize/:prizeId" element={<PrizePage />} />
-        <Route path="/books/:bookId" element={<BookPage />} />
-        <Route path="authors/:authorId" element={<AuthorPage />} />
+          <Route path="/" element={<App />} />
+          <Route path="/prize/:prizeId" element={<PrizePage />} />
+          <Route path="/books/:bookId" element={<BookPage />} />
+          <Route path="authors/:authorId" element={<AuthorPage />} />
 
-        {/* curator */}
-        <Route path="/curator" element={<Curator />} />
-        <Route path="/curator/addbook" element={<AddBook />} />
-        <Route path="/curator/addprize" element={<AddPrize />} />
-        <Route path="/curator/addbooktoprize" element={<AddBookToPrize />} />
-        <Route path="/curator/addlist" element={<AddList />} />
-        <Route path="/curator/addbooktolist" element={<AddBookToList />} />
-        <Route
-          path="/curator/dashboard"
-          element={<ManageResourcesDashboard />}
-        />
-      </Routes>
-    </Router>
-  </Provider>
+          {/* curator */}
+          <Route path="/curator" element={<Curator />} />
+          <Route path="/curator/addbook" element={<AddBook />} />
+          <Route path="/curator/addprize" element={<AddPrize />} />
+          <Route path="/curator/addbooktoprize" element={<AddBookToPrize />} />
+          <Route path="/curator/addlist" element={<AddList />} />
+          <Route path="/curator/addbooktolist" element={<AddBookToList />} />
+          <Route
+            path="/curator/dashboard"
+            element={<ManageResourcesDashboard />}
+          />
+        </Routes>
+      </Router>
+    </Provider>
+  </Auth0Provider>
 )
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import './curator_routes/GlobalStyles.css'
 import Navbar from '../../ui/Navbar'
+import React from 'react'
 
 export default function Curator() {
   return (
