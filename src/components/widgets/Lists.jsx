@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as api from '../../apiClient'
 import './Lists.css'
+import PropTypes from 'prop-types'
 
 export default function Lists(props) {
   const [listArray, setListArray] = useState([])
@@ -49,4 +50,8 @@ export default function Lists(props) {
       </div>
     </React.Fragment>
   )
+}
+
+Lists.propTypes = {
+  listData: PropTypes.object,
 }

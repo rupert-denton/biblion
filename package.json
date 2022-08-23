@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@auth0/auth0-react": "^1.10.2",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@reduxjs/toolkit": "^1.8.4",
@@ -15,6 +16,7 @@
     "knex": "^2.1.0",
     "nodemon": "^2.0.18",
     "pg": "^8.7.3",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
