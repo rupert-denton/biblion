@@ -27,7 +27,7 @@ export default function AddList() {
   }
 
   return (
-    <div className="curator-container">
+    <div className="add-item-container">
       <Navbar />
       <h1 className="heading">Add List</h1>
       <div className="form-container">

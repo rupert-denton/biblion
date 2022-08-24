@@ -2,7 +2,7 @@ import './GlobalStyles.css'
 
 export default function AddAuthor() {
   return (
-    <div className="curator-container">
+    <div className="add-item-container">
       <h1 className="heading">Add Author</h1>
       <div className="form-container">
         <form className="form" action="">

@@ -1,6 +1,13 @@
 import './GlobalStyles.css'
 import React, { useState, useEffect } from 'react'
 import * as api from '../../../../apiClient'
+import Navbar from '../../../ui/Navbar'
+import {
+  TextField,
+  MenuItem,
+  // FormControl,
+  Select,
+} from '@mui/material'
 
 export default function AddBook() {
   const [authorArray, setAuthorArray] = useState([])
@@ -41,9 +48,9 @@ export default function AddBook() {
 
   const authorDropDown = authorArray.map((author, id) => {
     return (
-      <option name="author_id" value={author.id} key={id}>
+      <MenuItem name="author_id" value={author.id} key={id}>
         {author.name}
-      </option>
+      </MenuItem>
     )
   })
 
@@ -78,92 +85,96 @@ export default function AddBook() {
 
   return (
     // book
-    <form onSubmit={handleSubmit}>
-      <div className="curator-container">
-        <h1 className="heading">Book Details</h1>
-        <div className="form-container">
-          <label>Book Title</label>
-          <input
-            type="text"
-            name="title"
-            className="form-item"
-            value={setBookData.title}
-            onChange={(e) => handleChangeBook(e)}
-          ></input>
-          <label>Blurb</label>
-          <textarea
-            className="form-item"
-            rows="8"
-            name="blurb"
-            value={setBookData.blurb}
-            onChange={(e) => handleChangeBook(e)}
-          ></textarea>
-          <label>Image Link</label>
-          <input
-            type="text"
-            name="cover_image"
-            className="form-item"
-            value={setBookData.cover_image}
-            onChange={(e) => handleChangeBook(e)}
-          ></input>
-          <label>Pub Year</label>
-          <input
-            type="text"
-            name="pub_year"
-            className="form-item"
-            value={setBookData.pub_year}
-            onChange={(e) => handleChangeBook(e)}
-          ></input>
-          <label>Genre</label>
-          <input
-            type="text"
-            name="genre"
-            className="form-item"
-            value={setBookData.genre}
-            onChange={(e) => handleChangeBook(e)}
-          ></input>
-          <select
-            className="dropdown"
-            name="author_id"
-            // value={authorArray.id}
-            onChange={(e) => handleSetExistingAuthor(e)}
-          >
-            <option value="" disabled>
-              --Author Name--
-            </option>
-            {authorDropDown}
-          </select>
+    <React.Fragment>
+      <Navbar />
+      <form onSubmit={handleSubmit}>
+        <div className="add-item-container">
+          <div className="form-container">
+            <h1 className="heading">Book Details</h1>
+            <label>Book Title</label>
+            <TextField
+              type="text"
+              name="title"
+              className="form-item"
+              value={setBookData.title}
+              onChange={(e) => handleChangeBook(e)}
+            ></TextField>
+            <label>Blurb</label>
+            <textarea
+              className="form-item"
+              rows="8"
+              name="blurb"
+              value={setBookData.blurb}
+              onChange={(e) => handleChangeBook(e)}
+            ></textarea>
+            <label>Image Link</label>
+            <TextField
+              type="text"
+              name="cover_image"
+              className="form-item"
+              value={setBookData.cover_image}
+              onChange={(e) => handleChangeBook(e)}
+            ></TextField>
+            <label>Pub Year</label>
+            <TextField
+              type="text"
+              name="pub_year"
+              className="form-item"
+              value={setBookData.pub_year}
+              onChange={(e) => handleChangeBook(e)}
+            ></TextField>
+            <label>Genre</label>
+            <TextField
+              type="text"
+              name="genre"
+              className="form-item"
+              value={setBookData.genre}
+              onChange={(e) => handleChangeBook(e)}
+            ></TextField>
+            <div className="choose-author">
+              <label>Author</label>
 
-          <h1 className="heading">Add New Author</h1>
-          <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            className="form-item"
-            // value={}
-            onChange={(e) => handleChangeAuthor(e)}
-          ></input>
-          <label>Bio</label>
-          <textarea
-            className="form-item"
-            rows="8"
-            name="bio"
-            onChange={(e) => handleChangeAuthor(e)}
-          ></textarea>
+              <Select
+                className="dropdown"
+                name="author_id"
+                // value={authorArray.id}
+                onChange={(e) => handleSetExistingAuthor(e)}
+              >
+                {authorDropDown}
+              </Select>
+            </div>
 
-          <label>Image Link</label>
-          <input
-            type="text"
-            name="image"
-            className="form-item"
-            onChange={(e) => handleChangeAuthor(e)}
-          ></input>
-          <button type="submit" className="addBook">
-            Add Book
-          </button>
+            <h1 className="heading">Add New Author</h1>
+            <label>Name</label>
+            <TextField
+              type="text"
+              name="name"
+              className="form-item"
+              // value={}
+              onChange={(e) => handleChangeAuthor(e)}
+            ></TextField>
+            <label>Bio</label>
+            <textarea
+              className="form-item"
+              rows="8"
+              name="bio"
+              onChange={(e) => handleChangeAuthor(e)}
+            ></textarea>
+
+            <label>Image Link</label>
+            <TextField
+              type="text"
+              name="image"
+              className="form-item"
+              onChange={(e) => handleChangeAuthor(e)}
+            ></TextField>
+            <button type="submit" className="addBook">
+              Add Book
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </React.Fragment>
   )
 }
 
