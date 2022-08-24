@@ -1,5 +1,26 @@
 .curator-container{
   width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.curator-heading-container{
+  display: flex;
+  justify-content: center;
+}
+
+.curator-tasks-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 80%;
+}
+
+.curator-task{
+  border: solid;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: .25rem;
 }
 
 .form-container{
@@ -32,3 +53,13 @@
   justify-content: space-between;
   flex-direction: row;
 }
+
+@media only screen 
+  and (max-device-width: 480px){
+    .curator-tasks-container{
+      display: grid;
+      grid-template-columns: 1fr;
+      width: 90%;
+    }
+    
+  }

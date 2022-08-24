@@ -74,6 +74,7 @@ function getBooksByList(id) {
 }
 
 function getBookById(id) {
+  console.log(id)
   return db('books')
     .join('authors', 'books.author_id', 'authors.id')
     .where('books.id', id)

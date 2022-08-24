@@ -6,6 +6,7 @@ import Lists from './widgets/Lists'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchPrizeData } from '../store/prizes-actions'
 import { fetchListData } from '../store/lists-actions'
+import { CssBaseline } from '@mui/material'
 
 export default function App() {
   const dispatch = useDispatch()
@@ -34,6 +35,7 @@ export default function App() {
 
   return (
     <div className="App">
+      <CssBaseline />
       <Navbar />
       <div className="homepage-container">
         <div className="prizes">
