@@ -121,7 +121,7 @@ export default function AddBookToList() {
   // </button>
 
   return (
-    <div className="curator-container">
+    <div className="add-item-container">
       <Navbar />
       <h1 className="heading">Add Books to List</h1>
       <div className="form-container">

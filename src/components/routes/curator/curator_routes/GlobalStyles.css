@@ -54,6 +54,22 @@
   flex-direction: row;
 }
 
+.add-item-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.form-container{
+  width: 70%;
+}
+
+.choose-author{
+  display: flex;
+  flex-direction: column;
+}
+
 @media only screen 
   and (max-device-width: 480px){
     .curator-tasks-container{

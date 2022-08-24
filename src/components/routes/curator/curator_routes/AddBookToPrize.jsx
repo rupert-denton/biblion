@@ -81,7 +81,7 @@ export default function AddBookToPrize() {
   return (
     // book
     <form onSubmit={handleSubmit}>
-      <div className="curator-container">
+      <div className="add-item-container">
         <h1 className="heading">Book Details</h1>
         <div className="prize-details-container">
           <div className="prize-details">
