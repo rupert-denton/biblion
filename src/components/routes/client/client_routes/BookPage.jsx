@@ -17,6 +17,7 @@ export default function BookPage() {
         setbookInfo(bookInfo)
         api.getOtherBooksByAuthor(bookInfo.author_id, bookId).then((books) => {
           setBooksByAuthor(books)
+
           return null
         })
       })
